@@ -1,0 +1,294 @@
+
+/*
+Creacion de Database
+*/
+
+USE [master]
+GO
+
+/****** Object:  Database [RESTO_DB]    Script Date: 6/13/2023 2:02:51 PM ******/
+CREATE DATABASE [RESTO_DB]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'RESTO_DB', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL16.SQLEXPRESS\MSSQL\DATA\RESTO_DB.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'RESTO_DB_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL16.SQLEXPRESS\MSSQL\DATA\RESTO_DB_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT, LEDGER = OFF
+GO
+
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [RESTO_DB].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+
+ALTER DATABASE [RESTO_DB] SET ANSI_NULL_DEFAULT OFF 
+GO
+
+ALTER DATABASE [RESTO_DB] SET ANSI_NULLS OFF 
+GO
+
+ALTER DATABASE [RESTO_DB] SET ANSI_PADDING OFF 
+GO
+
+ALTER DATABASE [RESTO_DB] SET ANSI_WARNINGS OFF 
+GO
+
+ALTER DATABASE [RESTO_DB] SET ARITHABORT OFF 
+GO
+
+ALTER DATABASE [RESTO_DB] SET AUTO_CLOSE OFF 
+GO
+
+ALTER DATABASE [RESTO_DB] SET AUTO_SHRINK OFF 
+GO
+
+ALTER DATABASE [RESTO_DB] SET AUTO_UPDATE_STATISTICS ON 
+GO
+
+ALTER DATABASE [RESTO_DB] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+
+ALTER DATABASE [RESTO_DB] SET CURSOR_DEFAULT  GLOBAL 
+GO
+
+ALTER DATABASE [RESTO_DB] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+
+ALTER DATABASE [RESTO_DB] SET NUMERIC_ROUNDABORT OFF 
+GO
+
+ALTER DATABASE [RESTO_DB] SET QUOTED_IDENTIFIER OFF 
+GO
+
+ALTER DATABASE [RESTO_DB] SET RECURSIVE_TRIGGERS OFF 
+GO
+
+ALTER DATABASE [RESTO_DB] SET  DISABLE_BROKER 
+GO
+
+ALTER DATABASE [RESTO_DB] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+
+ALTER DATABASE [RESTO_DB] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+
+ALTER DATABASE [RESTO_DB] SET TRUSTWORTHY OFF 
+GO
+
+ALTER DATABASE [RESTO_DB] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+
+ALTER DATABASE [RESTO_DB] SET PARAMETERIZATION SIMPLE 
+GO
+
+ALTER DATABASE [RESTO_DB] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+
+ALTER DATABASE [RESTO_DB] SET HONOR_BROKER_PRIORITY OFF 
+GO
+
+ALTER DATABASE [RESTO_DB] SET RECOVERY SIMPLE 
+GO
+
+ALTER DATABASE [RESTO_DB] SET  MULTI_USER 
+GO
+
+ALTER DATABASE [RESTO_DB] SET PAGE_VERIFY CHECKSUM  
+GO
+
+ALTER DATABASE [RESTO_DB] SET DB_CHAINING OFF 
+GO
+
+ALTER DATABASE [RESTO_DB] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+
+ALTER DATABASE [RESTO_DB] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+
+ALTER DATABASE [RESTO_DB] SET DELAYED_DURABILITY = DISABLED 
+GO
+
+ALTER DATABASE [RESTO_DB] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+GO
+
+ALTER DATABASE [RESTO_DB] SET QUERY_STORE = ON
+GO
+
+ALTER DATABASE [RESTO_DB] SET QUERY_STORE (OPERATION_MODE = READ_WRITE, CLEANUP_POLICY = (STALE_QUERY_THRESHOLD_DAYS = 30), DATA_FLUSH_INTERVAL_SECONDS = 900, INTERVAL_LENGTH_MINUTES = 60, MAX_STORAGE_SIZE_MB = 1000, QUERY_CAPTURE_MODE = AUTO, SIZE_BASED_CLEANUP_MODE = AUTO, MAX_PLANS_PER_QUERY = 200, WAIT_STATS_CAPTURE_MODE = ON)
+GO
+
+ALTER DATABASE [RESTO_DB] SET  READ_WRITE 
+GO
+
+/*
+Creacion de Tablas
+*/
+USE [RESTO_DB]
+GO
+
+/****** Object:  Table [dbo].[MESAS]    Script Date: 6/13/2023 2:03:19 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[MESAS](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[numeroMesa] [int] NULL,
+	[idMesero] [int] NULL,
+	[idPedido] [int] NULL,
+ CONSTRAINT [PK_MESAS] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[MESAS]  WITH CHECK ADD  CONSTRAINT [FK_MESAS_PEDIDOS] FOREIGN KEY([idPedido])
+REFERENCES [dbo].[PEDIDOS] ([id])
+GO
+
+ALTER TABLE [dbo].[MESAS] CHECK CONSTRAINT [FK_MESAS_PEDIDOS]
+GO
+
+ALTER TABLE [dbo].[MESAS]  WITH CHECK ADD  CONSTRAINT [FK_MESAS_USERS] FOREIGN KEY([idMesero])
+REFERENCES [dbo].[USERS] ([id])
+GO
+
+ALTER TABLE [dbo].[MESAS] CHECK CONSTRAINT [FK_MESAS_USERS]
+GO
+
+
+USE [RESTO_DB]
+GO
+
+/****** Object:  Table [dbo].[PEDIDOS]    Script Date: 6/13/2023 2:04:14 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[PEDIDOS](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[nombreCliente] [varchar](50) NULL,
+ CONSTRAINT [PK_PEDIDOS] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+USE [RESTO_DB]
+GO
+
+/****** Object:  Table [dbo].[PLATOS]    Script Date: 6/13/2023 2:04:45 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[PLATOS](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[nombre] [varchar](50) NULL,
+	[tipo] [varchar](50) NULL,
+ CONSTRAINT [PK_Platos] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+USE [RESTO_DB]
+GO
+
+/****** Object:  Table [dbo].[USERS]    Script Date: 6/13/2023 2:04:58 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[USERS](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[email] [varchar](50) NULL,
+	[pass] [varchar](50) NULL,
+	[nombre] [varchar](50) NULL,
+	[apellido] [varchar](50) NULL,
+	[fechaNacimiento] [smalldatetime] NULL,
+	[rolAdmin] [bit] NULL,
+	[profileImage] [varchar](50) NULL,
+ CONSTRAINT [PK_USERS] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/*
+Agregado de Datos
+*/
+
+USE [RESTO_DB]
+GO
+
+INSERT INTO PLATOS (nombre, tipo) VALUES
+('Hamburguesa clásica', 'Carnes'),
+('Sushi de salmón', 'Pescados y mariscos'),
+('Lasagna de carne', 'Pastas'),
+('Ensalada César', 'Ensaladas'),
+('Pizza margarita', 'Pizzas'),
+('Pollo a la parrilla', 'Carnes'),
+('Ceviche de camarón', 'Pescados y mariscos'),
+('Spaghetti a la bolognesa', 'Pastas'),
+('Ensalada griega', 'Ensaladas'),
+('Pizza hawaiana', 'Pizzas'),
+('Tacos al pastor', 'Carnes'),
+('Salmón a la plancha', 'Pescados y mariscos'),
+('Risotto de champiñones', 'Pastas'),
+('Ensalada de quinoa', 'Ensaladas'),
+('Pizza vegetariana', 'Pizzas'),
+('Camarones al ajillo', 'Pescados y mariscos'),
+('Fettuccine Alfredo', 'Pastas'),
+('Ensalada de pollo', 'Ensaladas'),
+('Pizza de pepperoni', 'Pizzas'),
+('Churrasco con chimichurri', 'Carnes'),
+('Pulpo a la gallega', 'Pescados y mariscos'),
+('Gnocchi con salsa pesto', 'Pastas'),
+('Ensalada caprese', 'Ensaladas'),
+('Pizza cuatro quesos', 'Pizzas'),
+('Chuletas de cerdo a la BBQ', 'Carnes'),
+('Ceviche de pescado', 'Pescados y mariscos'),
+('Raviolis rellenos de espinacas', 'Pastas'),
+('Ensalada de frutas', 'Ensaladas'),
+('Pizza de hongos', 'Pizzas');
+GO
+
+USE [RESTO_DB]
+GO
+
+INSERT INTO USERS (email, pass, nombre, apellido, fechaNacimiento, rolAdmin, profileImage) VALUES
+('gerente@resto.com', 'gerentepass', 'Gerente', 'Resto', '1980-01-01', 1, NULL),
+('mesero@resto.com', 'meseropass', 'Mesero', 'Resto', '1988-10-22', 0, NULL);
+GO
+
+USE [RESTO_DB]
+GO
+
+INSERT INTO MESAS (numeroMesa, idMesero, idPedido) VALUES
+(1, NULL, NULL),
+(2, NULL, NULL),
+(3, NULL, NULL),
+(4, NULL, NULL),
+(5, NULL, NULL),
+(6, NULL, NULL),
+(7, NULL, NULL),
+(8, NULL, NULL),
+(9, NULL, NULL),
+(10, NULL, NULL);
+GO

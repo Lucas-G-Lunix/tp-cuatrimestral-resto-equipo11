@@ -5,6 +5,10 @@ VisualStudioVersion = 17.7.33711.374
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resto-Web", "Resto-Web\Resto-Web.csproj", "{E38D8D80-856A-436B-A0DD-A29D791646E7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio", "Dominio\Dominio.csproj", "{4DE228D1-37EC-4969-A1E8-F6B84C291CA0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Negocio", "Negocio\Negocio.csproj", "{20E5C450-416C-4FBF-BAF6-53643C1CB546}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{E38D8D80-856A-436B-A0DD-A29D791646E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E38D8D80-856A-436B-A0DD-A29D791646E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E38D8D80-856A-436B-A0DD-A29D791646E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DE228D1-37EC-4969-A1E8-F6B84C291CA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DE228D1-37EC-4969-A1E8-F6B84C291CA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DE228D1-37EC-4969-A1E8-F6B84C291CA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DE228D1-37EC-4969-A1E8-F6B84C291CA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20E5C450-416C-4FBF-BAF6-53643C1CB546}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20E5C450-416C-4FBF-BAF6-53643C1CB546}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20E5C450-416C-4FBF-BAF6-53643C1CB546}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20E5C450-416C-4FBF-BAF6-53643C1CB546}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
