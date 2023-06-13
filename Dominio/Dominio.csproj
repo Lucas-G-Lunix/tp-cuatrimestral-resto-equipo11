@@ -42,7 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Gerente.cs" />
+    <Compile Include="Mesa.cs" />
     <Compile Include="Mesero.cs" />
+    <Compile Include="Pedido.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
