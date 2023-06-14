@@ -41,10 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DetallePedido.cs" />
     <Compile Include="Gerente.cs" />
     <Compile Include="Mesa.cs" />
     <Compile Include="Mesero.cs" />
     <Compile Include="Pedido.cs" />
+    <Compile Include="Plato.cs" />
+    <Compile Include="TipoPlato.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
