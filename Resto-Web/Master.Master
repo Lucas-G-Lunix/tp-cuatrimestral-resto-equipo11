@@ -26,11 +26,7 @@
                     </ul>
                     <ul class="navbar-nav justify-content-end">
                         <li class="nav-item">
-                            <a class="btn btn-primary" href="CarritoCompra.aspx">
-                                <i class="bi bi-cart3"></i>
-                                <span class="badge rounded-pill text-bg-light text ms-1">
-                                    <asp:Label ID="lblCantElementosCarrito" runat="server" Text=""></asp:Label></span>
-                            </a>
+                            <a class="btn btn-primary" href="Login.aspx" role="button">Login <i class="bi bi-box-arrow-in-right"></i></a>
                         </li>
                     </ul>
                 </div>
