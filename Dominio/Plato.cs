@@ -8,6 +8,8 @@
 
         public int Tipo { get; set; }
 
+        public CategoriaPlato Categoria { get; set; }
+
         public decimal Precio { get; set; }
     }
 }

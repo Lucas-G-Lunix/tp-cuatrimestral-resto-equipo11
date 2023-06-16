@@ -33,7 +33,7 @@
   <asp:TextBox runat="server" ID="txtFechaNacimiento"  CssClass ="form-control" TextMode="Date" />  
 </div>
 
-
+</div>
 
     
     <div class="col-md-4">

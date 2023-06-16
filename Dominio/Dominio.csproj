@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CategoriaPlato.cs" />
     <Compile Include="DetallePedido.cs" />
     <Compile Include="Gerente.cs" />
     <Compile Include="Mesa.cs" />
