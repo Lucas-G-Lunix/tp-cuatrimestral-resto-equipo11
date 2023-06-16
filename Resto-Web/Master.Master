@@ -32,7 +32,8 @@
                 </div>
             </div>
         </nav>
-        <div>
+        
+            <div class="container body-content card-footer table-danger lead">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
