@@ -67,16 +67,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AdministrarMesas.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Error.aspx" />
     <Content Include="FormPlato.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Images\mesa.svg" />
+    <Content Include="Images\no_image.svg" />
     <Content Include="Login.aspx" />
     <Content Include="Registrarse.aspx" />
     <Content Include="Web.config" />
     <Content Include="FormUsuario.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdministrarMesas.aspx.cs">
+      <DependentUpon>AdministrarMesas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdministrarMesas.aspx.designer.cs">
+      <DependentUpon>AdministrarMesas.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

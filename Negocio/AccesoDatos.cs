@@ -16,7 +16,7 @@ namespace Negocio
 
         public AccesoDatos()
         {
-            conexion = new SqlConnection(ConfigurationSettings.AppSettings["conexionDB"]);
+            conexion = new SqlConnection("server=.\\SQLEXPRESS; database=RESTO_DB; integrated security=true");
             comando = new SqlCommand();
         }
 
