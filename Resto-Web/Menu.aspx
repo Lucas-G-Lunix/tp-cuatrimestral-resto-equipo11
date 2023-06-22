@@ -1,40 +1,33 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Resto_Web.Default" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Menu.aspx.cs" Inherits="Resto_Web.Menu" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <style>
-        .centered {
-            position: absolute;
-            top: 34%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-    </style>
     <div class="container my-3">
         <div class="row row-cols-1 row-cols-md-3 g-4">
-            <asp:Repeater ID="rpMesas" runat="server">
+            <asp:Repeater ID="rpMenu" runat="server">
                 <ItemTemplate>
                     <div class="col">
                         <div class="card h-100">
                             <div class="container">
                                 <img src="Images/mesa.svg" class="card-img-top" alt="..." onerror="this.onerror=null; this.src='Images/no_image.svg'" height="500">
-                                <div class="centered display-1 fw-bold"><%# Eval("NumeroMesa") %></div>
                             </div>
 
                             <div class="card-body">
-                                <p class="card-text">Numero Mesero: <%# Eval("IdMesero") %></p>
-                                <%--Si tiene pedido asignado mostrar Detalle pedido
+                                <h5 class="card-title"><%# Eval("Nombre") %></h5>
+                                <p class="card-text">Tipo: <%# Eval("Tipo") %></p>
+                                <p class="card-text">Categoria: <%# Eval("Categoria") %></p>
+                                <p class="card-text">Precio: <%# Eval("Precio") %></p>
+                                <%--
+                                    Si tiene pedido asignado mostrar Detalle pedido
                                     <asp:Button ID="btnDetallePedido" runat="server" Text="Mostrar Pedido" CssClass="btn btn-primary" />
-                                    --%>
+                                    
                                 <asp:Button ID="btnCrearPedido" runat="server" Text="Crear Pedido" CssClass="btn btn-primary" />
-                                <asp:Button ID="btnDetallePedido" runat="server" Text="Mostrar Pedido" CssClass="btn btn-primary" />
-                                
+                                    --%>
                                 <% if (Negocio.Seguridad.esAdmin(Session["usuario"]))
                                     { %>
-                                    <asp:Button ID="btnEliminarMesa" runat="server" Text="Eliminar Mesa" CssClass="btn btn-info" OnClick="btnEliminarMesa_Click" CommandArgument='<%# Eval("Id") %>' CommandName="Id"/>
+                                    <asp:Button ID="btnModificarPlato" runat="server" Text="Modificar" CssClass="btn btn-info" OnClick="btnModificarPlato_Click" CommandArgument='<%# Eval("Id") %>' CommandName="Id"/>
                                 <% } %>
-
+                                
                             </div>
                         </div>
                     </div>

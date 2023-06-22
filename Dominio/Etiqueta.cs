@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace Dominio
 {
-    public class CategoriaPlato
+    public class Etiqueta
     {
-        public int IdCategoria { get; set; }
+        public int Id { get; set; }
 
         public string Descripcion { get; set; }
 

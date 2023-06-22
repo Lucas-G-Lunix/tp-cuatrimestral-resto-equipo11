@@ -4,22 +4,77 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container">
-        <div class="row justify-content-center my-3">
-            <div class="col-4">
-                    <div class="row mb-3">
-                        <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
-                        <div class="col-sm-10">
-                            <input type="email" class="form-control" id="inputEmail3">
+        <section class="vh-100">
+        <div class="container py-5 h-100">
+            <div class="row justify-content-center align-items-center h-100">
+                <div class="col-12 col-lg-9 col-xl-7">
+                    <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                        <div class="card-body p-4 p-md-5">
+                            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registrarse</h3>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+
+                                    <div class="form-outline">
+                                        <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control form-control-lg" type="text"></asp:TextBox>
+                                        <label class="form-label" for="firstName">Nombre</label>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6 mb-4">
+
+                                    <div class="form-outline">
+                                        <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control form-control-lg" type="text"></asp:TextBox>
+                                        <label class="form-label" for="lastName">Apellido</label>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="mb-4 pb-2">
+
+                                    <div class="form-outline">
+                                        <asp:TextBox ID="txtMail" runat="server" TextMode="Email" CssClass="form-control form-control-lg"></asp:TextBox>
+                                        <label class="form-label" for="emailAddress">Email</label>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="mb-4 pb-2">
+
+                                    <div class="form-outline">
+                                        <asp:TextBox ID="txtContraseña" runat="server" CssClass="form-control form-control-lg" TextMode="Password"></asp:TextBox>
+                                        <label class="form-label" for="phoneNumber">Contraseña</label>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-4 pb-2">
+
+                                    <div class="form-outline datepicker w-100">
+                                        <asp:TextBox ID="txtNacimiento" runat="server" TextMode="Date" CssClass="form-control form-control-lg"></asp:TextBox>
+                                        <label for="birthdayDate" class="form-label">Fecha Nacimiento</label>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6 d-flex justify-content-center">
+                                    <div class="form-outline">
+                                        <asp:Button ID="btnConfirmar" runat="server" Text="Confirmar Registro" CssClass="btn btn-success btn-block btn-lg text-body" />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="row mb-3">
-                        <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
-                        <div class="col-sm-10">
-                            <input type="password" class="form-control" id="inputPassword3">
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Registrarse</button>
+                </div>
             </div>
         </div>
+    </section>
     </div>
 </asp:Content>

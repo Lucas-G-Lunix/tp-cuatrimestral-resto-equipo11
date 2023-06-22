@@ -18,5 +18,10 @@ namespace Resto_Web
             rpMesas.DataSource = mesas;
             rpMesas.DataBind();
         }
+
+        protected void btnEliminarMesa_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

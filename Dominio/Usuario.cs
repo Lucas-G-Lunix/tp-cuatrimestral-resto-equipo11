@@ -17,5 +17,7 @@ namespace Dominio
         public string Pass { get; set; }
 
         public DateTime FechaNacimiento { get; set; }
+
+        public bool RolAdmin { get; set; }
     }
 }
