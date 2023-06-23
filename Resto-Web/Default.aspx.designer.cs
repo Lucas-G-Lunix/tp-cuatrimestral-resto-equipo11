@@ -15,6 +15,24 @@ namespace Resto_Web
     {
 
         /// <summary>
+        /// smUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager smUpdate;
+
+        /// <summary>
+        /// upMenu control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upMenu;
+
+        /// <summary>
         /// btnAgregarMesa control.
         /// </summary>
         /// <remarks>

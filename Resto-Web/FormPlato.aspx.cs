@@ -2,12 +2,6 @@
 using Negocio;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Xml.Linq;
-using static System.Collections.Specialized.BitVector32;
 
 namespace Resto_Web
 {
@@ -51,15 +45,17 @@ namespace Resto_Web
                     Session.Add("platoSeleccionado", seleccionado);
 
                     txtId.Text = id;
-                    
+
                     txtNombre.Text = seleccionado.Nombre;
 
                     txtPrecio.Text = seleccionado.Precio.ToString();
 
-                    txtImagen.Text = seleccionado.ImagenURL;
-
                     imgPlato.ImageUrl = seleccionado.ImagenURL;
-                    
+
+
+                    if (!string.IsNullOrEmpty(seleccionado.ImagenURL))
+                        imgPlato.ImageUrl = "~/Images/Platos" + seleccionado.ImagenURL;
+
                     ddlTipo.SelectedValue = seleccionado.Tipo.Id.ToString();
                     ddlCategoria.SelectedValue = seleccionado.Categoria.Id.ToString();
                 }
@@ -79,17 +75,23 @@ namespace Resto_Web
                 Plato nuevo = new Plato();
                 PlatoNegocio negocio = new PlatoNegocio();
 
-                nuevo.Id = int.Parse(txtId.Text);
+                nuevo.Id = negocio.ultimoId();
                 nuevo.Nombre = txtNombre.Text;
                 nuevo.Precio = decimal.Parse(txtPrecio.Text);
-                nuevo.ImagenURL = txtImagen.Text;
+
+                if (txtImagen.PostedFile.FileName != "")
+                {
+                    string ruta = Server.MapPath("./Images/Platos");
+                    txtImagen.PostedFile.SaveAs(ruta + "plato-" + nuevo.Id + ".jpg");
+                    nuevo.ImagenURL = "plato-" + nuevo.Id + ".jpg";
+                }
 
                 nuevo.Tipo = new Etiqueta();
                 nuevo.Tipo.Id = int.Parse(ddlTipo.SelectedValue);
                 nuevo.Categoria = new Etiqueta();
                 nuevo.Categoria.Id = int.Parse(ddlCategoria.SelectedValue);
 
-                if (Request.QueryString["id"] != null)
+                if (Request.QueryString["IdPlato"] != null)
                 {
                     nuevo.Id = int.Parse(txtId.Text);
                     negocio.modificar(nuevo);

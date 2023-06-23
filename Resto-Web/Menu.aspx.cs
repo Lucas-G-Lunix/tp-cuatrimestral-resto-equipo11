@@ -15,10 +15,7 @@ namespace Resto_Web
         {
             if (!IsPostBack)
             {
-                PlatoNegocio platoNegocio = new PlatoNegocio();
-                List<Plato> platos = platoNegocio.listar();
-                rpMenu.DataSource = platos;
-                rpMenu.DataBind();
+                RecargarMenu();
             }
         }
 
@@ -26,6 +23,41 @@ namespace Resto_Web
         {
             string valor = ((Button)sender).CommandArgument;
             Response.Redirect("FormPlato.aspx?IdPlato=" +  valor, false);
+        }
+
+        protected void btnEliminarPlato_Click(object sender, EventArgs e)
+        {
+            string valor = ((Button)sender).CommandArgument;
+            PlatoNegocio platoNegocio = new PlatoNegocio();
+            platoNegocio.eliminar(Convert.ToInt32(valor));
+            RecargarMenu();
+        }
+
+        protected void txtFiltrar_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                string filtro = txtFiltrar.Text;
+                PlatoNegocio platoNegocio = new PlatoNegocio();
+                List<Plato> listaPlatos = platoNegocio.listar();
+                List<Plato> listaFiltrada;
+                listaFiltrada = listaPlatos.FindAll(x =>
+                    x.Nombre.ToLower().Contains(filtro.ToLower()));
+                rpMenu.DataSource = listaFiltrada;
+                rpMenu.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Session.Add("Error", ex);
+            }
+        }
+
+        protected void RecargarMenu()
+        {
+            PlatoNegocio platoNegocio = new PlatoNegocio();
+            List<Plato> platos = platoNegocio.listar();
+            rpMenu.DataSource = platos;
+            rpMenu.DataBind();
         }
     }
 }

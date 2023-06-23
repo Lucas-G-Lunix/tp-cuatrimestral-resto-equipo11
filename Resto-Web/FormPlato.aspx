@@ -7,11 +7,14 @@
     <hr />
     <div class="container">
         <div class="row">
-            <div class="col-6">
+            <div class="col-md-4">
+                <% if (Request.QueryString["IdPlato"] != null)
+                    {%>
                 <div class="mb-3">
                     <label for="txtNombre" class="form-label">Id</label>
                     <asp:TextBox runat="server" ID="txtId" CssClass="form-control" />
                 </div>
+                <% } %>
 
                 <div class="mb-3">
                     <label for="txtID" class="form-label">Nombre</label>
@@ -35,8 +38,8 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="txtPrecio" class="form-label">Url Imagen</label>
-                    <asp:TextBox runat="server" ID="txtImagen" CssClass="form-control" />
+                    <label class="form-label">Imagen Plato</label>
+                    <input type="file" id="txtImagen" runat="server" class="form-control"/>
                 </div>
 
                 <div class="row">
@@ -46,8 +49,13 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6">
-                <asp:Image ID="imgPlato" runat="server" CssClass="img-fluid" />
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label class="form-label">Imagen Perfil</label>
+                    <input type="file" id="File1" runat="server" class="form-control" />
+                </div>
+                <asp:Image ID="imgPlato" ImageUrl="./Images/Design/no_image.svg"
+                    runat="server" CssClass="img-fluid mb-3" />
             </div>
         </div>
     </div>

@@ -66,7 +66,7 @@ namespace Resto_Web
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtImagen;
+        protected global::System.Web.UI.HtmlControls.HtmlInputFile txtImagen;
 
         /// <summary>
         /// btnGuardar control.
@@ -76,6 +76,15 @@ namespace Resto_Web
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnGuardar;
+
+        /// <summary>
+        /// File1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputFile File1;
 
         /// <summary>
         /// imgPlato control.

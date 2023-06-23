@@ -1,7 +1,6 @@
 ﻿using Dominio;
 using System;
 using System.Collections.Generic;
-using System.IO;
 
 namespace Negocio
 {
@@ -69,7 +68,7 @@ namespace Negocio
                 Plato plato = new Plato();
                 while (datos.Lector.Read())
                 {
-                    
+
                     plato.Id = (int)datos.Lector["Id"];
                     plato.Nombre = (string)datos.Lector["Nombre"];
                     plato.Tipo = new Etiqueta();
@@ -142,11 +141,54 @@ namespace Negocio
             {
                 datos.setearConsulta("INSERT INTO PLATOS (Nombre, Tipo, Categoria, Precio, ImagenUrl) VALUES (@Nombre, @Tipo, @Categoria, @Precio, @ImagenUrl)");
                 datos.setearParametro("@Nombre", nuevo.Id);
-                datos.setearParametro("@Tipo", nuevo.Id);
-                datos.setearParametro("@Categoria", nuevo.Id);
-                datos.setearParametro("@Precio", nuevo.Id);
-                datos.setearParametro("@ImagenUrl", nuevo.Id);
+                datos.setearParametro("@Tipo", nuevo.Tipo);
+                datos.setearParametro("@Categoria", nuevo.Categoria);
+                datos.setearParametro("@Precio", nuevo.Precio);
+                datos.setearParametro("@ImagenUrl", nuevo.ImagenURL);
                 datos.ejecutarAccion();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void eliminar(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("DELETE FROM PLATOS WHERE Id = @IdPlato");
+                datos.setearParametro("@IdPlato", id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public int ultimoId()
+        {
+            AccesoDatos datos = new AccesoDatos();
+            int ultimoId = 0;
+            try
+            {
+                datos.setearProcedimiento("SP_LastIdPlato");
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    ultimoId = (int)datos.Lector["Id"];
+                }
+                return ultimoId;
             }
             catch (Exception)
             {
