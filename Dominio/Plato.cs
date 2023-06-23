@@ -11,5 +11,7 @@
         public Etiqueta Categoria { get; set; }
 
         public decimal Precio { get; set; }
+        
+        public string ImagenURL { get; set; }
     }
 }

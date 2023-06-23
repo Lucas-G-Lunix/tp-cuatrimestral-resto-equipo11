@@ -16,16 +16,6 @@
 
         <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
             <div class="container-fluid">
-                <button
-                    class="navbar-toggler"
-                    type="button"
-                    data-mdb-toggle="collapse"
-                    data-mdb-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <i class="fas fa-bars"></i>
-                </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <a class="navbar-brand mt-2 mt-lg-0" href="#">Resto</a>
@@ -41,7 +31,9 @@
 
                 <div class="d-flex align-items-center">
 
-                    <a class="btn btn-primary me-3" href="Login.aspx">
+                    <%if (Session["usuario"] == null)
+                        { %>
+                        <a class="btn btn-primary me-3" href="Login.aspx">
                         Login
                         <i class="bi bi-box-arrow-in-right"></i>
                     </a>
@@ -49,7 +41,16 @@
                         Registrarse
                         <i class="bi bi-box-arrow-in-right"></i>
                     </a>
+                    <%} else { %>
+                    <asp:LinkButton ID="btnSalir" runat="server" OnClick="btnSalir_Click" CssClass="btn btn-danger me-3">
+                        Salir
+                        <i class="bi bi-box-arrow-in-right"></i>
+                    </asp:LinkButton>
+                    <% } %>
+                    <a href="MiPerfil.aspx">
+                        
                     <asp:Image ID="imgPerfil" runat="server" CssClass="rounded-circle" Height="25" loading="lazy" />
+                    </a>
                 </div>
             </div>
         </nav>

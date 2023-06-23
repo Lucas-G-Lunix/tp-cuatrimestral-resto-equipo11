@@ -13,7 +13,10 @@ namespace Resto_Web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["usuario"] != null)
+            {
+                Response.Redirect("Default.aspx");
+            }
         }
 
         protected void btnConfirmar_Click(object sender, EventArgs e)
@@ -22,7 +25,6 @@ namespace Resto_Web
             UsuarioNegocio negocio = new UsuarioNegocio();
             try
             {
-
                 usuario.Email = txtEmail.Text;
                 usuario.Pass = txtPassword.Text;
                 if (negocio.Login(usuario))

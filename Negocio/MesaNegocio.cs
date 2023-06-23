@@ -1,9 +1,6 @@
-﻿using System;
+﻿using Dominio;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Dominio;
 
 namespace Negocio
 {
@@ -33,6 +30,46 @@ namespace Negocio
                     mesas.Add(mesa);
                 }
                 return mesas;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+        public void eliminar(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            List<Mesa> mesas = new List<Mesa>();
+            try
+            {
+                datos.setearConsulta("DELETE FROM MESAS WHERE Id = @Id");
+                datos.setearParametro("@Id", id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void agregar()
+        {
+            AccesoDatos datos = new AccesoDatos();
+            List<Mesa> mesas = new List<Mesa>();
+            try
+            {
+                datos.setearProcedimiento("SP_NuevaMesa");
+                datos.ejecutarAccion();
             }
             catch (Exception)
             {

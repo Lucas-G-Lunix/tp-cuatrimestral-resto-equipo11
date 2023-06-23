@@ -14,7 +14,8 @@ namespace Resto_Web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            imgPerfil.ImageUrl = "Images/no_image.svg";
+            imgPerfil.ImageUrl = "Images/Design/no_image.svg";
+
             if (!(Page is Login || Page is Registrarse || Page is Error))
             {
                 if (!Seguridad.sesionActiva(Session["usuario"]))
@@ -24,10 +25,13 @@ namespace Resto_Web
                     Usuario user = (Usuario)Session["usuario"];
                     //lblUser.Text = user.Email;
                     if (!string.IsNullOrEmpty(user.ImagenURL))
-                        imgPerfil.ImageUrl = "~/Images/" + user.ImagenURL;
+                    {
+                        imgPerfil.ImageUrl = "~/Images/Usuarios" + user.ImagenURL;
+                    }
                 }
             }
         }
+
         protected void btnSalir_Click(object sender, EventArgs e)
         {
             Session.Clear();

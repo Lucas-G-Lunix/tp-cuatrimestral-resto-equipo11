@@ -55,6 +55,10 @@ namespace Resto_Web
                     txtNombre.Text = seleccionado.Nombre;
 
                     txtPrecio.Text = seleccionado.Precio.ToString();
+
+                    txtImagen.Text = seleccionado.ImagenURL;
+
+                    imgPlato.ImageUrl = seleccionado.ImagenURL;
                     
                     ddlTipo.SelectedValue = seleccionado.Tipo.Id.ToString();
                     ddlCategoria.SelectedValue = seleccionado.Categoria.Id.ToString();
@@ -68,41 +72,40 @@ namespace Resto_Web
             }
         }
 
+        protected void btnGuardar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Plato nuevo = new Plato();
+                PlatoNegocio negocio = new PlatoNegocio();
+
+                nuevo.Id = int.Parse(txtId.Text);
+                nuevo.Nombre = txtNombre.Text;
+                nuevo.Precio = decimal.Parse(txtPrecio.Text);
+                nuevo.ImagenURL = txtImagen.Text;
+
+                nuevo.Tipo = new Etiqueta();
+                nuevo.Tipo.Id = int.Parse(ddlTipo.SelectedValue);
+                nuevo.Categoria = new Etiqueta();
+                nuevo.Categoria.Id = int.Parse(ddlCategoria.SelectedValue);
+
+                if (Request.QueryString["id"] != null)
+                {
+                    nuevo.Id = int.Parse(txtId.Text);
+                    negocio.modificar(nuevo);
+                }
+                else
+                {
+                    negocio.agregar(nuevo);
+                }
+
+                Response.Redirect("Menu.aspx", false);
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx");
+            }
+        }
     }
-
-
-    //protected void btnAceptar_Click(object sender, EventArgs e)
-    //{
-    //    try
-    //    {
-    //        Pokemon nuevo = new Pokemon();
-    //        PokemonNegocio negocio = new PokemonNegocio();
-
-    //        nuevo.Numero = int.Parse(txtNumero.Text);
-    //        nuevo.Nombre = txtNombre.Text;
-    //        nuevo.Descripcion = txtDescripcion.Text;
-    //        nuevo.UrlImagen = txtImagenUrl.Text;
-
-    //        nuevo.Tipo = new Elemento();
-    //        nuevo.Tipo.Id = int.Parse(ddlTipo.SelectedValue);
-    //        nuevo.Debilidad = new Elemento();
-    //        nuevo.Debilidad.Id = int.Parse(ddlDebilidad.SelectedValue);
-
-    //        if (Request.QueryString["id"] != null)
-    //        {
-    //            nuevo.Id = int.Parse(txtId.Text);
-    //            negocio.modificarConSP(nuevo);
-    //        }
-    //        else
-    //            negocio.agregarConSP(nuevo);
-
-
-    //        Response.Redirect("PokemonsLista.aspx", false);
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        Session.Add("error", ex.ToString());
-    //        Response.Redirect("Error.aspx");
-    //    }
-    //}
 }

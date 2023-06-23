@@ -1,60 +1,36 @@
 ﻿using Dominio;
 using System;
+using static System.Net.Mime.MediaTypeNames;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Negocio
 {
     public class UsuarioNegocio
     {
-        //public int insertarNuevo(Usuario nuevo)
-        //{
-        //    AccesoDatos datos = new AccesoDatos();
+        public void insertarNuevo(Usuario nuevo)
+        {
+            AccesoDatos datos = new AccesoDatos();
 
-        //    try
-        //    {
-        //        datos.setearProcedimiento("insertarNuevo");
-        //        datos.setearParametro("@email", nuevo.Email);
-        //        datos.setearParametro("@pass", nuevo.Pass);
-        //        return datos.ejecutarAccionScalar();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //    finally
-        //    {
-        //        datos.cerrarConexion();
-        //    }
-
-        //}
-
-        //public void actualizar(Usuario user)
-        //{
-        //    AccesoDatos datos = new AccesoDatos();
-        //    try
-        //    {
-        //        datos.setearConsulta("Update USERS set imagenPerfil = @imagen, Nombre = @nombre, Apellido = @apellido, fechaNacimiento = @fecha Where Id = @id");
-        //        //datos.setearParametro("@imagen", user.ImagenPerfil != null ? user.ImagenPerfil : (object)DBNull.Value);
-        //        datos.setearParametro("@imagen", (object)user.ImagenPerfil ?? DBNull.Value);
-        //        datos.setearParametro("@nombre", user.Nombre);
-        //        datos.setearParametro("@apellido", user.Apellido);
-        //        datos.setearParametro("@fecha", user.FechaNacimiento);
-        //        datos.setearParametro("@id", user.Id);
-        //        datos.ejecutarAccion();
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //    finally
-        //    {
-        //        datos.cerrarConexion();
-        //    }
-        //}
+            try
+            {
+                datos.setearConsulta("INSERT INTO USERS (Email, Pass, Nombre, Apellido, FechaNacimiento, RolAdmin) VALUES (@Email, @Pass, @Nombre, @Apellido, @FechaNacimiento, @RolAdmin)");
+                datos.setearParametro("@Email", nuevo.Email);
+                datos.setearParametro("@Pass", nuevo.Pass);
+                datos.setearParametro("@Nombre", nuevo.Nombre);
+                datos.setearParametro("@Apellido", nuevo.Apellido);
+                datos.setearParametro("@FechaNacimiento", nuevo.FechaNacimiento);
+                datos.setearParametro("@RolAdmin", false);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
 
         public bool Login(Usuario usuario)
         {
@@ -91,6 +67,33 @@ namespace Negocio
             finally
             {
                 datos.cerrarConexion();
+            }
+        }
+
+        public void actualizar(Usuario user)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("UPDATE USERS SET Email = @Email, Nombre = @Nombre, Apellido = @Apellido, FechaNacimiento = @Fecha, ProfileImage = @Image Where Id = @Id");
+                datos.setearParametro("@Email", user.Email);
+                datos.setearParametro("@Image", (object)user.ImagenURL ?? DBNull.Value);
+                datos.setearParametro("@Nombre", user.Nombre);
+                datos.setearParametro("@Apellido", user.Apellido);
+                datos.setearParametro("@Fecha", user.FechaNacimiento);
+                datos.setearParametro("@Id", user.Id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+
+
+
             }
         }
     }

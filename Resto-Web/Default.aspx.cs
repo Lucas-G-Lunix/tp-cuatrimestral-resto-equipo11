@@ -13,15 +13,37 @@ namespace Resto_Web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            MesaNegocio mesaNegocio = new MesaNegocio();
-            List<Mesa> mesas = mesaNegocio.listar();
-            rpMesas.DataSource = mesas;
-            rpMesas.DataBind();
+            if (!IsPostBack)
+            {
+                MesaNegocio mesaNegocio = new MesaNegocio();
+                List<Mesa> mesas = mesaNegocio.listar();
+                rpMesas.DataSource = mesas;
+                rpMesas.DataBind();
+            }
         }
 
         protected void btnEliminarMesa_Click(object sender, EventArgs e)
         {
+            string valor = ((Button)sender).CommandArgument;
+            MesaNegocio mesaNegocio = new MesaNegocio();
+            mesaNegocio.eliminar(Convert.ToInt32(valor));
+            recargarCards();
+        }
 
+        protected void btnAgregarMesa_Click(object sender, EventArgs e)
+        {
+            string valor = ((Button)sender).CommandArgument;
+            MesaNegocio mesaNegocio = new MesaNegocio();
+            mesaNegocio.agregar();
+            recargarCards();
+        }
+
+        protected void recargarCards()
+        {
+            MesaNegocio mesaNegocio = new MesaNegocio();
+            List<Mesa> mesas = mesaNegocio.listar();
+            rpMesas.DataSource = mesas;
+            rpMesas.DataBind();
         }
     }
 }
