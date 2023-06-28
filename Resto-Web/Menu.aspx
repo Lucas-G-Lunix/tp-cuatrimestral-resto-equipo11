@@ -15,7 +15,10 @@
             min-height: 300px;
         }
 
-        #ContentPlaceHolder1_btnRecargarFiltros {
+        #ContentPlaceHolder1_btnRecargarFiltros{
+            margin-top: 38px;
+        }
+        ContentPlaceHolder1_chkCombinarFiltros {
             margin-top: 38px;
         }
     </style>
@@ -48,10 +51,13 @@
                         <label for="txtCategoria" class="form-label">Categoria</label>
                         <asp:DropDownList ID="ddlCategoria" CssClass="form-select" runat="server" OnSelectedIndexChanged="ddlCategoria_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
                     </div>
-                    <div class="col-1">
-                        <asp:LinkButton ID="btnRecargarFiltros" runat="server" CssClass="btn btn-primary" OnClick="btnRecargarFiltros_Click">
+                    <div class="col-3">
+                            <asp:LinkButton ID="btnRecargarFiltros" runat="server" CssClass="btn btn-primary" OnClick="btnRecargarFiltros_Click">
                             <i class="bi bi-arrow-clockwise"></i>
                         </asp:LinkButton>
+                                
+                            <asp:CheckBox ID="chkCombinarFiltros" runat="server" CssClass="btn-check" type="checkbox"/>
+                            <label class="btn btn-outline-primary" for="ContentPlaceHolder1_chkCombinarFiltros">Combinar Filtros</label>
                     </div>
                 </div>
 

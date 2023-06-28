@@ -78,6 +78,64 @@ namespace Negocio
             }
         }
 
+        public List<Mesa> listarMesero(int idMesero)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            List<Mesa> mesas = new List<Mesa>();
+            try
+            {
+                datos.setearConsulta("SELECT Id, NumeroMesa, IdPedido, IdMesero FROM MESAS WHERE IdMesero = @IdMesero");
+                datos.setearParametro("@IdMesero", idMesero);
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    Mesa mesa = new Mesa();
+                    mesa.Id = (int)datos.Lector["Id"];
+                    mesa.NumeroMesa = (int)datos.Lector["NumeroMesa"];
+                    if (!(datos.Lector["IdPedido"] is DBNull))
+                    {
+                        mesa.IdPedido = (int)datos.Lector["IdPedido"];
+                    }
+                    if (!(datos.Lector["IdMesero"] is DBNull))
+                    {
+                        mesa.IdMesero = (int)datos.Lector["IdMesero"];
+                    }
+                    mesas.Add(mesa);
+                }
+                return mesas;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void modificar(Mesa nuevo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("UPDATE MESAS SET IdPedido = @IdPedido, IdMesero = @IdMesero WHERE Id = @Id");
+                datos.setearParametro("@IdPedido", nuevo.IdPedido);
+                datos.setearParametro("@IdMesero", nuevo.IdMesero);
+                datos.setearParametro("@Id", nuevo.Id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
         public void eliminar(int id)
         {
             AccesoDatos datos = new AccesoDatos();

@@ -50,22 +50,8 @@
                                         <h6 class="card-title">Numero Pedido: <%# Convert.ToInt32(Eval("IdPedido")) == 0 ? "No Asignado" : Eval("IdPedido")%></h6>
                                         <hr />
                                         <div class="d-grid gap-2 d-md-block">
-
-                                            <%
-                                                bool hayPedido = false;
-                                                if (hayPedido)
-                                                {
-                                            %>
-                                            <asp:Button ID="btnDetallePedido" runat="server" Text="Mostrar Pedido" CssClass="btn btn-info" type="button" />
-                                            <%
-                                                }
-                                                else
-                                                {
-                                            %>
-                                            <asp:Button ID="btnCrearPedido" runat="server" Text="Crear Pedido" CssClass="btn btn-info" type="button" OnClick="btnCrearPedido_Click" CommandArgument='<%# Eval("Id") %>' CommandName="Id" />
-                                            <% 
-                                                }
-                                            %>
+                                            <asp:Button ID="btnCrearPedido" runat="server" Text='<%# Convert.ToInt32(Eval("IdPedido")) == 0 ? "Crear Pedido" : "Mostrar Pedido"%>' CssClass="btn btn-info" type="button" OnClick="btnCrearPedido_Click" CommandArgument='<%# Eval("Id") %>' CommandName="Id" />
+                                            
 
                                             <% 
                                                 if (Negocio.Seguridad.esAdmin(Session["usuario"]))

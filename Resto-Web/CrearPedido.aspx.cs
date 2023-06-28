@@ -33,11 +33,13 @@ namespace Resto_Web
                 {
                     MesaNegocio mesaNegocio = new MesaNegocio();
 
+                    PedidoNegocio pedidoNegocio = new PedidoNegocio();
+
                     Mesa seleccionada = mesaNegocio.listar(int.Parse(id));
 
                     txtNumeroMesa.Text = seleccionada.NumeroMesa.ToString();
 
-                    txtNumeroPedido.Text = seleccionada.IdPedido.ToString();
+                    txtNumeroPedido.Text = pedidoNegocio.ultimoID().ToString();
                 }
 
             }
@@ -50,48 +52,33 @@ namespace Resto_Web
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-        //    try
-        //    {
-        //        Pedido nuevo = new Pedido();
+            try
+            {
+                string idMesa = Request.QueryString["IdMesa"] != null ? Request.QueryString["IdMesa"].ToString() : "";
+                PedidoNegocio pedidoNegocio = new PedidoNegocio();
+                MesaNegocio mesaNegocio = new MesaNegocio();
+                Pedido nuevo = new Pedido();
+                Mesa mesa = new Mesa();
 
+                nuevo.IdMesa = int.Parse(idMesa);
+                nuevo.NombreCliente = txtNombreCliente.Text;
+                nuevo.IdMesero = int.Parse(ddlMesero.SelectedValue);
+                nuevo.FechaPedido = DateTime.Now;
 
-        //        Session.Add("pedido" + id, seleccionada);
-        //        Pedido negocio = new PlatoNegocio();
+                mesa.Id = int.Parse(idMesa);
+                mesa.IdPedido = pedidoNegocio.ultimoID();
+                mesa.IdMesero = int.Parse(ddlMesero.SelectedValue);
 
-        //        nuevo.Id = negocio.ultimoId();
-        //        nuevo.Nombre = txtNombre.Text;
-        //        nuevo.Stock = int.Parse(txtStock.Text);
-        //        nuevo.Precio = decimal.Parse(txtPrecio.Text);
+                pedidoNegocio.agregar(nuevo);
+                mesaNegocio.modificar(mesa);
 
-        //        if (txtImagen.PostedFile.FileName != "")
-        //        {
-        //            string ruta = Server.MapPath("./Images/Platos");
-        //            txtImagen.PostedFile.SaveAs(ruta + "plato-" + nuevo.Id + ".jpg");
-        //            nuevo.ImagenURL = "plato-" + nuevo.Id + ".jpg";
-        //        }
-
-        //        nuevo.Tipo = new Etiqueta();
-        //        nuevo.Tipo.Id = int.Parse(ddlTipo.SelectedValue);
-        //        nuevo.Categoria = new Etiqueta();
-        //        nuevo.Categoria.Id = int.Parse(ddlCategoria.SelectedValue);
-
-        //        if (Request.QueryString["IdPlato"] != null)
-        //        {
-        //            nuevo.Id = int.Parse(txtId.Text);
-        //            negocio.modificar(nuevo);
-        //        }
-        //        else
-        //        {
-        //            negocio.agregar(nuevo);
-        //        }
-
-        //        Response.Redirect("Menu.aspx", false);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Session.Add("error", ex.ToString());
-        //        Response.Redirect("Error.aspx");
-        //    }
+                Response.Redirect("Default.aspx", false);
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.ToString());
+                Response.Redirect("error.aspx");
+            }
         }
     }
 }

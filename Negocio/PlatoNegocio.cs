@@ -124,13 +124,13 @@ namespace Negocio
             try
             {
                 datos.setearConsulta("UPDATE PLATOS SET Nombre = @Nombre, Tipo = @Tipo, Categoria = @Categoria, Precio = @Precio, ImagenUrl = @ImagenUrl, Stock = @Stock WHERE Id = @IdPLato");
-                datos.setearParametro("@IdPLato", nuevo.Id);
                 datos.setearParametro("@Nombre", nuevo.Nombre);
                 datos.setearParametro("@Stock", nuevo.Stock);
                 datos.setearParametro("@Tipo", nuevo.Tipo.Id);
                 datos.setearParametro("@Categoria", nuevo.Categoria.Id);
                 datos.setearParametro("@Precio", nuevo.Precio);
-                datos.setearParametro("@ImagenUrl", nuevo.ImagenURL);
+                datos.setearParametro("@ImagenUrl", (object)nuevo.ImagenURL ?? DBNull.Value);
+                datos.setearParametro("@IdPLato", nuevo.Id);
                 datos.ejecutarAccion();
             }
             catch (Exception)
@@ -149,7 +149,7 @@ namespace Negocio
             try
             {
                 datos.setearConsulta("INSERT INTO PLATOS (Nombre, Stock, Tipo, Categoria, Precio, ImagenUrl) VALUES (@Nombre, @Stock, @Tipo, @Categoria, @Precio, @ImagenUrl)");
-                datos.setearParametro("@Nombre", nuevo.Id);
+                datos.setearParametro("@Nombre", nuevo.Nombre);
                 datos.setearParametro("@Stock", nuevo.Stock);
                 datos.setearParametro("@Tipo", nuevo.Tipo.Id);
                 datos.setearParametro("@Categoria", nuevo.Categoria.Id);

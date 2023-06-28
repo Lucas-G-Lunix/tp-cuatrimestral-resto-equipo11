@@ -10,12 +10,12 @@
                 <div class="col-md-4">
 
                     <div class="mb-3">
-                        <label for="txtID" class="form-label">Numero Mesa</label>
+                        <label for="txtNumeroMesa" class="form-label">Numero Mesa</label>
                         <asp:TextBox runat="server" ID="txtNumeroMesa" CssClass="form-control" readonly/>
                     </div>
 
                     <div class="mb-3">
-                        <label for="txtID" class="form-label">Numero Pedido</label>
+                        <label for="txtNumeroPedido" class="form-label">Numero Pedido</label>
                         <asp:TextBox runat="server" ID="txtNumeroPedido" CssClass="form-control" readonly/>
                     </div>
 
