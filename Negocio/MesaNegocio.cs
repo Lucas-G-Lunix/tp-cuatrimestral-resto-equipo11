@@ -41,6 +41,43 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
+        public Mesa listar(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            List<Mesa> mesas = new List<Mesa>();
+            try
+            {
+                datos.setearConsulta("SELECT Id, NumeroMesa, IdPedido, IdMesero FROM MESAS WHERE Id = @Id");
+                datos.setearParametro("@Id", id);
+                datos.ejecutarLectura();
+                Mesa mesa = new Mesa();
+                while (datos.Lector.Read())
+                {
+                    mesa.Id = (int)datos.Lector["Id"];
+                    mesa.NumeroMesa = (int)datos.Lector["NumeroMesa"];
+                    if (!(datos.Lector["IdPedido"] is DBNull))
+                    {
+                        mesa.IdPedido = (int)datos.Lector["IdPedido"];
+                    }
+                    if (!(datos.Lector["IdMesero"] is DBNull))
+                    {
+                        mesa.IdMesero = (int)datos.Lector["IdMesero"];
+                    }
+                }
+                return mesa;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
         public void eliminar(int id)
         {
             AccesoDatos datos = new AccesoDatos();

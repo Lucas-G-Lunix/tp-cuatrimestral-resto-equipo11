@@ -15,10 +15,7 @@ namespace Resto_Web
         {
             if (!IsPostBack)
             {
-                MesaNegocio mesaNegocio = new MesaNegocio();
-                List<Mesa> mesas = mesaNegocio.listar();
-                rpMesas.DataSource = mesas;
-                rpMesas.DataBind();
+                recargarCards();
             }
         }
 
@@ -44,6 +41,12 @@ namespace Resto_Web
             List<Mesa> mesas = mesaNegocio.listar();
             rpMesas.DataSource = mesas;
             rpMesas.DataBind();
+        }
+
+        protected void btnCrearPedido_Click(object sender, EventArgs e)
+        {
+            string valor = ((Button)sender).CommandArgument;
+            Response.Redirect("CrearPedido.aspx?IdMesa=" + valor, false);
         }
     }
 }

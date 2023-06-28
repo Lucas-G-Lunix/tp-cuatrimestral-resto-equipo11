@@ -52,7 +52,7 @@
                                         <div class="d-grid gap-2 d-md-block">
 
                                             <%
-                                                bool hayPedido = true;
+                                                bool hayPedido = false;
                                                 if (hayPedido)
                                                 {
                                             %>
@@ -62,7 +62,7 @@
                                                 else
                                                 {
                                             %>
-                                            <asp:Button ID="btnCrearPedido" runat="server" Text="Crear Pedido" CssClass="btn btn-info" type="button" />
+                                            <asp:Button ID="btnCrearPedido" runat="server" Text="Crear Pedido" CssClass="btn btn-info" type="button" OnClick="btnCrearPedido_Click" CommandArgument='<%# Eval("Id") %>' CommandName="Id" />
                                             <% 
                                                 }
                                             %>
@@ -71,7 +71,7 @@
                                                 if (Negocio.Seguridad.esAdmin(Session["usuario"]))
                                                 {
                                             %>
-                                            <asp:Button ID="btnEliminarMesa" runat="server" Text="Eliminar Mesa" CssClass="btn btn-warning" OnClick="btnEliminarMesa_Click" CommandArgument='<%# Eval("Id") %>' CommandName="Id" />
+                                            <asp:Button ID="btnEliminarMesa" runat="server" Text="Eliminar Mesa" CssClass="btn btn-warning" type="button" OnClick="btnEliminarMesa_Click" CommandArgument='<%# Eval("Id") %>' CommandName="Id" />
                                             <%
                                                 }
                                             %>

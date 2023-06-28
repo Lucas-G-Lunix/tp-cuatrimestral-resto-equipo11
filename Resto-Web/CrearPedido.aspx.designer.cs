@@ -11,70 +11,52 @@ namespace Resto_Web
 {
 
 
-    public partial class Menu
+    public partial class CrearPedido
     {
 
         /// <summary>
-        /// smUpdate control.
+        /// txtNumeroMesa control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager smUpdate;
+        protected global::System.Web.UI.WebControls.TextBox txtNumeroMesa;
 
         /// <summary>
-        /// upMenu control.
+        /// txtNumeroPedido control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upMenu;
+        protected global::System.Web.UI.WebControls.TextBox txtNumeroPedido;
 
         /// <summary>
-        /// txtFiltrar control.
+        /// txtNombreCliente control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFiltrar;
+        protected global::System.Web.UI.WebControls.TextBox txtNombreCliente;
 
         /// <summary>
-        /// ddlTipo control.
+        /// ddlMesero control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTipo;
+        protected global::System.Web.UI.WebControls.DropDownList ddlMesero;
 
         /// <summary>
-        /// ddlCategoria control.
+        /// btnGuardar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCategoria;
-
-        /// <summary>
-        /// btnRecargarFiltros control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnRecargarFiltros;
-
-        /// <summary>
-        /// rpMenu control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rpMenu;
+        protected global::System.Web.UI.WebControls.Button btnGuardar;
     }
 }

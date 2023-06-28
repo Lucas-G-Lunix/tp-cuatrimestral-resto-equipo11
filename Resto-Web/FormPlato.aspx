@@ -22,6 +22,11 @@
                 </div>
 
                 <div class="mb-3">
+                    <label for="txtStock" class="form-label">Stock</label>
+                    <asp:TextBox runat="server" ID="txtStock" CssClass="form-control" />
+                </div>
+
+                <div class="mb-3">
                     <label for="txtTipo" class="form-label">Tipo</label>
                     <asp:DropDownList ID="ddlTipo" CssClass="form-select" runat="server"></asp:DropDownList>
                 </div>
@@ -43,17 +48,13 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col">
                         <asp:Button Text="Guardar" CssClass="btn btn-primary" ID="btnGuardar" runat="server" OnClick="btnGuardar_Click" />
                         <a href="Menu.aspx" class="btn btn-warning">Volver</a>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="mb-3">
-                    <label class="form-label">Imagen Perfil</label>
-                    <input type="file" id="File1" runat="server" class="form-control" />
-                </div>
                 <asp:Image ID="imgPlato" ImageUrl="./Images/Design/no_image.svg"
                     runat="server" CssClass="img-fluid mb-3" />
             </div>

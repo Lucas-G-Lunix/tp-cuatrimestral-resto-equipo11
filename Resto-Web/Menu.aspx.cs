@@ -16,6 +16,19 @@ namespace Resto_Web
             if (!IsPostBack)
             {
                 RecargarMenu();
+                EtiquetaNegocio negocio = new EtiquetaNegocio();
+                List<Etiqueta> listaTipo = negocio.listar(true);
+
+                ddlTipo.DataSource = listaTipo;
+                ddlTipo.DataValueField = "Id";
+                ddlTipo.DataTextField = "Descripcion";
+                ddlTipo.DataBind();
+
+                listaTipo = negocio.listar(false);
+                ddlCategoria.DataSource = listaTipo;
+                ddlCategoria.DataValueField = "Id";
+                ddlCategoria.DataTextField = "Descripcion";
+                ddlCategoria.DataBind();
             }
         }
 
@@ -52,12 +65,66 @@ namespace Resto_Web
             }
         }
 
+        protected void ddlTipo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                int filtro = int.Parse(ddlTipo.SelectedValue);
+                PlatoNegocio platoNegocio = new PlatoNegocio();
+                List<Plato> listaPlatos = platoNegocio.listar();
+                List<Plato> listaFiltrada;
+                listaFiltrada = listaPlatos.FindAll(x =>
+                    x.Tipo.Id == filtro);
+                rpMenu.DataSource = listaFiltrada;
+                rpMenu.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Session.Add("Error", ex);
+            }
+        }
+
+        protected void ddlCategoria_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                int filtro = int.Parse(ddlCategoria.SelectedValue);
+                PlatoNegocio platoNegocio = new PlatoNegocio();
+                List<Plato> listaPlatos = platoNegocio.listar();
+                List<Plato> listaFiltrada;
+                listaFiltrada = listaPlatos.FindAll(x =>
+                    x.Categoria.Id == filtro);
+                rpMenu.DataSource = listaFiltrada;
+                rpMenu.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Session.Add("Error", ex);
+            }
+        }
+
+        protected void filtrosCombinados()
+        {
+            try
+            {
+
+            } catch (Exception ex)
+            {
+                Session.Add("Error", ex);
+            }
+        }
+
         protected void RecargarMenu()
         {
             PlatoNegocio platoNegocio = new PlatoNegocio();
             List<Plato> platos = platoNegocio.listar();
             rpMenu.DataSource = platos;
             rpMenu.DataBind();
+        }
+
+        protected void btnRecargarFiltros_Click(object sender, EventArgs e)
+        {
+            RecargarMenu();
         }
     }
 }

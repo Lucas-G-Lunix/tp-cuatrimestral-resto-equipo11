@@ -48,6 +48,8 @@ namespace Resto_Web
 
                     txtNombre.Text = seleccionado.Nombre;
 
+                    txtStock.Text = seleccionado.Stock.ToString();
+
                     txtPrecio.Text = seleccionado.Precio.ToString();
 
                     imgPlato.ImageUrl = seleccionado.ImagenURL;
@@ -75,13 +77,21 @@ namespace Resto_Web
                 Plato nuevo = new Plato();
                 PlatoNegocio negocio = new PlatoNegocio();
 
-                nuevo.Id = negocio.ultimoId();
+                if (Request.QueryString["IdPlato"] != null)
+                {
+                    nuevo.Id = int.Parse(txtId.Text);
+                }
+                else
+                {
+                    nuevo.Id = negocio.ultimoId();
+                }
                 nuevo.Nombre = txtNombre.Text;
+                nuevo.Stock = int.Parse(txtStock.Text);
                 nuevo.Precio = decimal.Parse(txtPrecio.Text);
 
                 if (txtImagen.PostedFile.FileName != "")
                 {
-                    string ruta = Server.MapPath("./Images/Platos");
+                    string ruta = Server.MapPath("./Images/Platos/");
                     txtImagen.PostedFile.SaveAs(ruta + "plato-" + nuevo.Id + ".jpg");
                     nuevo.ImagenURL = "plato-" + nuevo.Id + ".jpg";
                 }

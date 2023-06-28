@@ -12,7 +12,7 @@ namespace Negocio
             List<Plato> platos = new List<Plato>();
             try
             {
-                datos.setearConsulta("SELECT p.Id, p.Nombre, t.Id AS IdTipo, t.Tipo, p.Precio, c.Id AS IdCategoria, c.Categoria, p.ImagenUrl AS Imagen FROM PLATOS p INNER JOIN TIPOS_PLATOS t ON t.Id = p.Tipo INNER JOIN CATEGORIAS_PLATOS c ON c.Id = p.Categoria");
+                datos.setearConsulta("SELECT p.Id, p.Nombre, p.Stock AS Stock, t.Id AS IdTipo, t.Tipo, p.Precio, c.Id AS IdCategoria, c.Categoria, p.ImagenUrl AS Imagen FROM PLATOS p INNER JOIN TIPOS_PLATOS t ON t.Id = p.Tipo INNER JOIN CATEGORIAS_PLATOS c ON c.Id = p.Categoria");
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {
@@ -31,6 +31,10 @@ namespace Negocio
                     if (!(datos.Lector["Precio"] is DBNull))
                     {
                         plato.Precio = (decimal)datos.Lector["Precio"];
+                    }
+                    if (!(datos.Lector["Stock"] is DBNull))
+                    {
+                        plato.Stock = (int)datos.Lector["Stock"];
                     }
                     plato.Categoria = new Etiqueta();
                     if (!(datos.Lector["IdCategoria"] is DBNull))
@@ -62,7 +66,7 @@ namespace Negocio
             List<Plato> platos = new List<Plato>();
             try
             {
-                datos.setearConsulta("SELECT p.Id, p.Nombre, t.Id AS IdTipo, t.Tipo, p.Precio, c.Id AS IdCategoria, c.Categoria, p.ImagenUrl AS Imagen FROM PLATOS p INNER JOIN TIPOS_PLATOS t ON t.Id = p.Tipo INNER JOIN CATEGORIAS_PLATOS c ON c.Id = p.Categoria WHERE p.Id = @IdPLato");
+                datos.setearConsulta("SELECT p.Id, p.Nombre, p.Stock AS Stock, t.Id AS IdTipo, t.Tipo, p.Precio, c.Id AS IdCategoria, c.Categoria, p.ImagenUrl AS Imagen FROM PLATOS p INNER JOIN TIPOS_PLATOS t ON t.Id = p.Tipo INNER JOIN CATEGORIAS_PLATOS c ON c.Id = p.Categoria WHERE p.Id = @IdPLato");
                 datos.setearParametro("@IdPLato", id);
                 datos.ejecutarLectura();
                 Plato plato = new Plato();
@@ -83,6 +87,10 @@ namespace Negocio
                     if (!(datos.Lector["Precio"] is DBNull))
                     {
                         plato.Precio = (decimal)datos.Lector["Precio"];
+                    }
+                    if (!(datos.Lector["Stock"] is DBNull))
+                    {
+                        plato.Stock = (int)datos.Lector["Stock"];
                     }
                     plato.Categoria = new Etiqueta();
                     if (!(datos.Lector["IdCategoria"] is DBNull))
@@ -115,13 +123,14 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("UPDATE PLATOS SET Nombre = @Nombre, Tipo = @Tipo, Categoria = @Categoria, Precio = @Precio, ImagenUrl = @ImagenUrl WHERE Id = @IdPLato");
+                datos.setearConsulta("UPDATE PLATOS SET Nombre = @Nombre, Tipo = @Tipo, Categoria = @Categoria, Precio = @Precio, ImagenUrl = @ImagenUrl, Stock = @Stock WHERE Id = @IdPLato");
                 datos.setearParametro("@IdPLato", nuevo.Id);
-                datos.setearParametro("@Nombre", nuevo.Id);
-                datos.setearParametro("@Tipo", nuevo.Id);
-                datos.setearParametro("@Categoria", nuevo.Id);
-                datos.setearParametro("@Precio", nuevo.Id);
-                datos.setearParametro("@ImagenUrl", nuevo.Id);
+                datos.setearParametro("@Nombre", nuevo.Nombre);
+                datos.setearParametro("@Stock", nuevo.Stock);
+                datos.setearParametro("@Tipo", nuevo.Tipo.Id);
+                datos.setearParametro("@Categoria", nuevo.Categoria.Id);
+                datos.setearParametro("@Precio", nuevo.Precio);
+                datos.setearParametro("@ImagenUrl", nuevo.ImagenURL);
                 datos.ejecutarAccion();
             }
             catch (Exception)
@@ -139,10 +148,11 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("INSERT INTO PLATOS (Nombre, Tipo, Categoria, Precio, ImagenUrl) VALUES (@Nombre, @Tipo, @Categoria, @Precio, @ImagenUrl)");
+                datos.setearConsulta("INSERT INTO PLATOS (Nombre, Stock, Tipo, Categoria, Precio, ImagenUrl) VALUES (@Nombre, @Stock, @Tipo, @Categoria, @Precio, @ImagenUrl)");
                 datos.setearParametro("@Nombre", nuevo.Id);
-                datos.setearParametro("@Tipo", nuevo.Tipo);
-                datos.setearParametro("@Categoria", nuevo.Categoria);
+                datos.setearParametro("@Stock", nuevo.Stock);
+                datos.setearParametro("@Tipo", nuevo.Tipo.Id);
+                datos.setearParametro("@Categoria", nuevo.Categoria.Id);
                 datos.setearParametro("@Precio", nuevo.Precio);
                 datos.setearParametro("@ImagenUrl", nuevo.ImagenURL);
                 datos.ejecutarAccion();

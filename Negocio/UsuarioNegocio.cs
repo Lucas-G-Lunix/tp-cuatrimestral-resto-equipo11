@@ -96,5 +96,31 @@ namespace Negocio
 
             }
         }
+
+        public List<Usuario> listar()
+        {
+            AccesoDatos datos = new AccesoDatos();
+            List<Usuario> usuarios = new List<Usuario>();
+            try
+            {
+                datos.setearConsulta("SELECT Id, Email, Nombre, Apellido FROM USERS WHERE RolAdmin = 0");
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    Usuario usuario = new Usuario();
+                    usuario.Id = (int)datos.Lector["Id"];
+                    usuario.Email = (string)datos.Lector["Email"];
+                    usuario.Nombre = (string)datos.Lector["Nombre"];
+                    usuario.Apellido = (string)datos.Lector["Apellido"];
+                    usuarios.Add(usuario);
+                }
+                return usuarios;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

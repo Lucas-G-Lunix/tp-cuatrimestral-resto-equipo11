@@ -3,16 +3,20 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         #img-cards {
-            margin-top: 3px;
+            margin-top: 1px;
             height: 100%;
             width: 100%;
             object-fit: contain;
-            max-height: 300px;
-            border-radius: 30px;
+            max-height: 280px;
+            border-radius: 10px;
         }
 
         #container-img {
             min-height: 300px;
+        }
+
+        #ContentPlaceHolder1_btnRecargarFiltros {
+            margin-top: 38px;
         }
     </style>
 </asp:Content>
@@ -34,6 +38,23 @@
                     </div>
                 </div>
 
+                <div class="row mb-2">
+                    <div class="col">
+
+                        <label for="txtTipo" class="form-label">Tipo</label>
+                        <asp:DropDownList ID="ddlTipo" CssClass="form-select" runat="server" OnSelectedIndexChanged="ddlTipo_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                    </div>
+                    <div class="col">
+                        <label for="txtCategoria" class="form-label">Categoria</label>
+                        <asp:DropDownList ID="ddlCategoria" CssClass="form-select" runat="server" OnSelectedIndexChanged="ddlCategoria_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                    </div>
+                    <div class="col-1">
+                        <asp:LinkButton ID="btnRecargarFiltros" runat="server" CssClass="btn btn-primary" OnClick="btnRecargarFiltros_Click">
+                            <i class="bi bi-arrow-clockwise"></i>
+                        </asp:LinkButton>
+                    </div>
+                </div>
+
                 <div class="row row-cols-1 row-cols-md-3 g-4">
 
                     <asp:Repeater ID="rpMenu" runat="server">
@@ -41,11 +62,12 @@
                             <div class="col">
                                 <div class="card h-100">
                                     <div id="container-img">
-                                        <img src="<%# Eval("ImagenURL") %>" class="card-img-top" id="img-cards" alt="..." onerror="this.onerror=null; this.src='Images/Design/no_image.svg'">
+                                        <img src="<%# "/Images/Platos/" + Eval("ImagenURL") %>" class="card-img-top" id="img-cards" alt="..." onerror="this.onerror=null; this.src='Images/Design/no_image.svg'">
                                     </div>
 
                                     <div class="card-body">
                                         <h5 class="card-title"><%# Eval("Nombre") %></h5>
+                                        <p class="card-text">Stock: <%# Eval("Stock") %></p>
                                         <p class="card-text">Tipo: <%# Eval("Tipo") %></p>
                                         <p class="card-text">Categoria: <%# Eval("Categoria") %></p>
                                         <p class="card-text">Precio: <%# Eval("Precio") %></p>
