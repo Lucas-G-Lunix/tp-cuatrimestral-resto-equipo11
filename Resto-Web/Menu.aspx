@@ -15,9 +15,10 @@
             min-height: 300px;
         }
 
-        #ContentPlaceHolder1_btnRecargarFiltros{
+        #ContentPlaceHolder1_btnRecargarFiltros {
             margin-top: 38px;
         }
+
         ContentPlaceHolder1_chkCombinarFiltros {
             margin-top: 38px;
         }
@@ -41,7 +42,7 @@
                     </div>
                 </div>
 
-                <div class="row mb-2">
+                <div class="row">
                     <div class="col">
 
                         <label for="txtTipo" class="form-label">Tipo</label>
@@ -52,17 +53,22 @@
                         <asp:DropDownList ID="ddlCategoria" CssClass="form-select" runat="server" OnSelectedIndexChanged="ddlCategoria_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
                     </div>
                     <div class="col-3">
-                            <asp:LinkButton ID="btnRecargarFiltros" runat="server" CssClass="btn btn-primary" OnClick="btnRecargarFiltros_Click">
-                            <i class="bi bi-arrow-clockwise"></i>
+                        <asp:LinkButton ID="btnRecargarFiltros" runat="server" CssClass="btn btn-primary" OnClick="btnRecargarFiltros_Click">
+                            <i class="bi bi-arrow-clockwise"></i> Recargar Filtros
                         </asp:LinkButton>
-                                
-                            <asp:CheckBox ID="chkCombinarFiltros" runat="server" CssClass="btn-check" type="checkbox"/>
-                            <label class="btn btn-outline-primary" for="ContentPlaceHolder1_chkCombinarFiltros">Combinar Filtros</label>
+                    </div>
+                </div>
+
+                <div class="row my-2 ms-2">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="chkCombinarFiltros" runat="server">
+                        <label class="form-check-label" for="chkCombinarFiltros">
+                            Combinar Filtros
+                        </label>
                     </div>
                 </div>
 
                 <div class="row row-cols-1 row-cols-md-3 g-4">
-
                     <asp:Repeater ID="rpMenu" runat="server">
                         <ItemTemplate>
                             <div class="col">
@@ -76,7 +82,7 @@
                                         <p class="card-text">Stock: <%# Eval("Stock") %></p>
                                         <p class="card-text">Tipo: <%# Eval("Tipo") %></p>
                                         <p class="card-text">Categoria: <%# Eval("Categoria") %></p>
-                                        <p class="card-text">Precio: <%# Eval("Precio") %></p>
+                                        <p class="card-text">Precio: <%# Convert.ToInt32(Eval("Precio")) %> $</p>
                                         <%--
                                     Si tiene pedido asignado mostrar Detalle pedido
                                     <asp:Button ID="btnDetallePedido" runat="server" Text="Mostrar Pedido" CssClass="btn btn-primary" />

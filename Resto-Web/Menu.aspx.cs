@@ -69,26 +69,23 @@ namespace Resto_Web
         {
             try
             {
+
+                int filtroTipo = int.Parse(ddlTipo.SelectedValue);
+                int filtroCategoria = int.Parse(ddlCategoria.SelectedValue);
+                PlatoNegocio platoNegocio = new PlatoNegocio();
+                List<Plato> listaPlatos = platoNegocio.listar();
+                List<Plato> listaFiltrada;
                 if (chkCombinarFiltros.Checked)
                 {
-                    int filtro = int.Parse(ddlTipo.SelectedValue);
-                    PlatoNegocio platoNegocio = new PlatoNegocio();
-                    List<Plato> listaPlatos = platoNegocio.listar();
-                    List<Plato> listaFiltrada;
                     listaFiltrada = listaPlatos.FindAll(x =>
-                        x.Tipo.Id == filtro);
+                        x.Categoria.Id == filtroCategoria && x.Tipo.Id == filtroTipo);
                     rpMenu.DataSource = listaFiltrada;
                     rpMenu.DataBind();
                 }
                 else
                 {
-                    int filtroTipo = int.Parse(ddlTipo.SelectedValue);
-                    int filtroCategoria = int.Parse(ddlCategoria.SelectedValue);
-                    PlatoNegocio platoNegocio = new PlatoNegocio();
-                    List<Plato> listaPlatos = platoNegocio.listar();
-                    List<Plato> listaFiltrada;
                     listaFiltrada = listaPlatos.FindAll(x =>
-                        x.Categoria.Id == filtroCategoria && x.Tipo.Id == filtroTipo);
+                        x.Tipo.Id == filtroTipo);
                     rpMenu.DataSource = listaFiltrada;
                     rpMenu.DataBind();
                 }
@@ -103,25 +100,22 @@ namespace Resto_Web
         {
             try
             {
-                if (!chkCombinarFiltros.Checked)
+                int filtroTipo = int.Parse(ddlTipo.SelectedValue);
+                int filtroCategoria = int.Parse(ddlCategoria.SelectedValue);
+                PlatoNegocio platoNegocio = new PlatoNegocio();
+                List<Plato> listaPlatos = platoNegocio.listar();
+                List<Plato> listaFiltrada;
+                if (chkCombinarFiltros.Checked)
                 {
-                    int filtro = int.Parse(ddlCategoria.SelectedValue);
-                    PlatoNegocio platoNegocio = new PlatoNegocio();
-                    List<Plato> listaPlatos = platoNegocio.listar();
-                    List<Plato> listaFiltrada;
-                    listaFiltrada = listaPlatos.FindAll(x =>
-                        x.Categoria.Id == filtro);
-                    rpMenu.DataSource = listaFiltrada;
-                    rpMenu.DataBind();
-                } else
-                {
-                    int filtroTipo = int.Parse(ddlTipo.SelectedValue);
-                    int filtroCategoria = int.Parse(ddlCategoria.SelectedValue);
-                    PlatoNegocio platoNegocio = new PlatoNegocio();
-                    List<Plato> listaPlatos = platoNegocio.listar();
-                    List<Plato> listaFiltrada;
                     listaFiltrada = listaPlatos.FindAll(x =>
                         x.Categoria.Id == filtroCategoria && x.Tipo.Id == filtroTipo);
+                    rpMenu.DataSource = listaFiltrada;
+                    rpMenu.DataBind();
+                }
+                else
+                {
+                    listaFiltrada = listaPlatos.FindAll(x =>
+                        x.Tipo.Id == filtroCategoria);
                     rpMenu.DataSource = listaFiltrada;
                     rpMenu.DataBind();
                 }
