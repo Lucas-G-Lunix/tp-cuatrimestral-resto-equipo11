@@ -50,13 +50,13 @@ namespace Resto_Web
 
                     txtStock.Text = seleccionado.Stock.ToString();
 
-                    txtPrecio.Text = seleccionado.Precio.ToString();
+                    txtPrecio.Text = Convert.ToInt32(seleccionado.Precio).ToString();
 
                     imgPlato.ImageUrl = seleccionado.ImagenURL;
 
 
                     if (!string.IsNullOrEmpty(seleccionado.ImagenURL))
-                        imgPlato.ImageUrl = "~/Images/Platos" + seleccionado.ImagenURL;
+                        imgPlato.ImageUrl = "~/Images/Platos/" + seleccionado.ImagenURL;
 
                     ddlTipo.SelectedValue = seleccionado.Tipo.Id.ToString();
                     ddlCategoria.SelectedValue = seleccionado.Categoria.Id.ToString();
