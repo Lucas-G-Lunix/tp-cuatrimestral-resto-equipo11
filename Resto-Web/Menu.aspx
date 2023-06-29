@@ -33,7 +33,7 @@
                     <div class="input-group rounded my-2">
                         <% if (Negocio.Seguridad.esAdmin(Session["usuario"]))
                             { %>
-                        <a href="FormPlato.aspx" class="btn btn-primary">Agregar Plato</a>
+                        <a href="FormPlato.aspx" class="btn btn-success">Agregar Plato</a>
                         <% } %>
                         <asp:TextBox ID="txtFiltrar" runat="server" AutoPostBack="true" CssClass="form-control rounded mx-1" placeholder="Buscar" aria-describedby="search-addon" OnTextChanged="txtFiltrar_TextChanged"></asp:TextBox>
                         <span class="input-group-text border-2 mx-2">
@@ -91,8 +91,8 @@
                                         --%>
                                         <% if (Negocio.Seguridad.esAdmin(Session["usuario"]))
                                             { %>
-                                        <asp:Button ID="btnModificarPlato" runat="server" Text="Modificar" CssClass="btn btn-info" OnClick="btnModificarPlato_Click" CommandArgument='<%# Eval("Id") %>' CommandName="Id" />
-                                        <asp:Button ID="btnEliminarPlato" runat="server" Text="Eliminar" CssClass="btn btn-warning" OnClick="btnEliminarPlato_Click" CommandArgument='<%# Eval("Id") %>' CommandName="Id" />
+                                        <asp:Button ID="btnModificarPlato" runat="server" Text="Modificar" CssClass="btn btn-warning" OnClick="btnModificarPlato_Click" CommandArgument='<%# Eval("Id") %>' CommandName="Id" />
+                                        <asp:Button ID="btnEliminarPlato" runat="server" Text="Eliminar" CssClass="btn btn-danger" OnClick="btnEliminarPlato_Click" CommandArgument='<%# Eval("Id") %>' CommandName="Id" />
                                         <% } %>
                                     </div>
                                 </div>
