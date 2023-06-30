@@ -50,5 +50,60 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
-    }
+
+        public void eliminar(bool tipo, int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                if (tipo)
+                {
+                    datos.setearConsulta("DELETE TIPOS_PLATOS WHERE Id = @Id");
+                }
+                else
+                {
+                    datos.setearConsulta("DELETE CATEGORIAS_PLATOS WHERE Id = @Id");
+                }
+                datos.setearParametro("@Id", id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void agregar(bool tipo, Etiqueta etiqueta)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            List<Etiqueta> etiquetas = new List<Etiqueta>();
+            try
+            {
+                if (tipo)
+                {
+                    datos.setearConsulta("INSERT INTO TIPOS_PLATOS(Tipo) VALUES(@Tipo)");
+                }
+                else
+                {
+                    datos.setearConsulta("INSERT INTO CATEGORIAS_PLATOS(Categoria) VALUES(@Tipo)");
+                }
+                datos.setearParametro("@Tipo", etiqueta.Descripcion);
+                datos.ejecutarAccion();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+    }   
 }

@@ -25,7 +25,11 @@
                     <div class="input-group rounded my-2">
                         <% if (Negocio.Seguridad.esAdmin(Session["usuario"]))
                             { %>
-                        <a href="FormPlato.aspx" class="btn btn-success">Agregar Plato</a>
+                        <a href="FormPlato.aspx" class="btn btn-outline-success">Agregar Plato</a>
+                        
+                        <a href="AdministrarCategoria.aspx" class="btn btn-outline-info">Administrar Categorias</a>
+
+                        <a href="AdministrarTipo.aspx" class="btn btn-outline-warning">Administrar Tipo</a>
                         <% } %>
                         <asp:TextBox ID="txtFiltrar" runat="server" AutoPostBack="true" CssClass="form-control rounded mx-1" placeholder="Buscar" aria-describedby="search-addon" OnTextChanged="txtFiltrar_TextChanged"></asp:TextBox>
                         <span class="input-group-text border-2 mx-2">
