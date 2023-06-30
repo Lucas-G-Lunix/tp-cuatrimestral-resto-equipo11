@@ -26,7 +26,7 @@ namespace Resto_Web
                     //lblUser.Text = user.Email;
                     if (!string.IsNullOrEmpty(user.ImagenURL))
                     {
-                        imgPerfil.ImageUrl = "~/Images/Usuarios" + user.ImagenURL;
+                        imgPerfil.ImageUrl = "~/Images/Usuarios/" + user.ImagenURL;
                     }
                 }
             }

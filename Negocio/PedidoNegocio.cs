@@ -58,5 +58,34 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
+        public Pedido listar(int idMesa)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            Pedido pedido = new Pedido();
+            try
+            {
+                datos.setearConsulta("SELECT NombreCliente, IdMesa, IdUser, Fecha FROM PEDIDOS WHERE IdMesa = @Id");
+                datos.setearParametro("@Id", idMesa);
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    pedido.NombreCliente = (string)datos.Lector["NombreCliente"];
+                    pedido.IdMesa = (int)datos.Lector["IdMesa"];
+                    pedido.IdMesero = (int)datos.Lector["IdUser"];
+                }
+                return pedido;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
     }
 }

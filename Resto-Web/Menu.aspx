@@ -2,14 +2,6 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
-        #img-cards {
-            margin-top: 1px;
-            height: 100%;
-            width: 100%;
-            object-fit: contain;
-            max-height: 280px;
-            border-radius: 10px;
-        }
 
         #container-img {
             min-height: 300px;
@@ -52,29 +44,36 @@
                         <label for="txtCategoria" class="form-label">Categoria</label>
                         <asp:DropDownList ID="ddlCategoria" CssClass="form-select" runat="server" OnSelectedIndexChanged="ddlCategoria_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
                     </div>
-                    <div class="col-3">
-                        <asp:LinkButton ID="btnRecargarFiltros" runat="server" CssClass="btn btn-primary" OnClick="btnRecargarFiltros_Click">
-                            <i class="bi bi-arrow-clockwise"></i> Recargar Filtros
-                        </asp:LinkButton>
+                    <div class="col-4">
+                        <div class="row align-items-end gap-0">
+                            <div class="col">
+                                <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="chkCombinarFiltros" runat="server">
+                                <label class="form-check-label" for="chkCombinarFiltros">
+                                    Combinar Filtros
+                                </label>
+                            </div>
+                                </div>
+                        <div class="col">
+                            <asp:LinkButton ID="btnRecargarFiltros" runat="server" CssClass="btn btn-primary" OnClick="btnRecargarFiltros_Click">
+                                <i class="bi bi-arrow-clockwise"></i> Recargar Filtros
+                            </asp:LinkButton>
+                        </div>
+                            </div>
                     </div>
                 </div>
 
                 <div class="row my-2 ms-2">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="chkCombinarFiltros" runat="server">
-                        <label class="form-check-label" for="chkCombinarFiltros">
-                            Combinar Filtros
-                        </label>
-                    </div>
+                    
                 </div>
 
-                <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="row row-cols-1 row-cols-md-4 g-4">
                     <asp:Repeater ID="rpMenu" runat="server">
                         <ItemTemplate>
                             <div class="col">
                                 <div class="card h-100">
                                     <div id="container-img">
-                                        <img src="<%# "/Images/Platos/" + Eval("ImagenURL") %>" class="card-img-top" id="img-cards" alt="..." onerror="this.onerror=null; this.src='Images/Design/no_image.svg'">
+                                        <img src="<%# "/Images/Platos/" + Eval("ImagenURL") %>" class="card-img-top img-fluid"  alt="..." onerror="this.onerror=null; this.src='Images/Design/no_image.svg'">
                                     </div>
 
                                     <div class="card-body">

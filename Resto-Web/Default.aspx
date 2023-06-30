@@ -36,7 +36,7 @@
                         <% } %>
                     </div>
                 </div>
-                <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="row row-cols-1 row-cols-md-4 g-4">
                     <asp:Repeater ID="rpMesas" runat="server">
                         <ItemTemplate>
                             <div class="col">

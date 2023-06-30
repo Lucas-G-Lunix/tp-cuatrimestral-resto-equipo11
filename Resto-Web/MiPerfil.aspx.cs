@@ -24,7 +24,7 @@ namespace Resto_Web
                     txtApellido.Text = user.Apellido;
                     txtFechaNacimiento.Text = user.FechaNacimiento.ToString("yyyy-MM-dd");
                     if (!string.IsNullOrEmpty(user.ImagenURL))
-                        imgNuevoPerfil.ImageUrl = "~/Images/Usuarios" + user.ImagenURL;
+                        imgNuevoPerfil.ImageUrl = "./Images/Usuarios/" + user.ImagenURL;
                 }
             }
         }
@@ -43,7 +43,7 @@ namespace Resto_Web
 
                 if (txtImagen.PostedFile.FileName != "")
                 {
-                    string ruta = Server.MapPath("./Images/Usuarios");
+                    string ruta = Server.MapPath("./Images/Usuarios/");
                     txtImagen.PostedFile.SaveAs(ruta + "perfil-" + user.Id + ".jpg");
                     user.ImagenURL = "perfil-" + user.Id + ".jpg";
                 }
@@ -57,7 +57,7 @@ namespace Resto_Web
 
                 //leer img
                 Image img = (Image)Master.FindControl("imgPerfil");
-                img.ImageUrl = "~/Images/Usuarios" + user.ImagenURL;
+                img.ImageUrl = "/Images/Usuarios/" + user.ImagenURL;
 
                 Response.Redirect("Default.aspx", false);
 

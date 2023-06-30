@@ -49,7 +49,7 @@
                     <% } %>
                     <a href="MiPerfil.aspx">
                         
-                    <asp:Image ID="imgPerfil" runat="server" CssClass="rounded-circle" Height="25" loading="lazy" />
+                    <asp:Image ID="imgPerfil" runat="server" CssClass="rounded-circle" Height="25" loading="lazy" onerror="this.onerror=null; this.src='Images/Design/no_image.svg'" />
                     </a>
                 </div>
             </div>

@@ -9,14 +9,14 @@ namespace Resto_Web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Seguridad.esAdmin(Session["usuario"]))
-            {
-                Session.Add("error", "Se requiere permisos de admin para acceder a esta pantalla");
-                Response.Redirect("Error.aspx");
-            }
             try
             {
-                //configuración inicial de la pantalla.
+
+                string idMesa = Request.QueryString["IdMesa"] != null ? Request.QueryString["IdMesa"].ToString() : "";
+                PedidoNegocio pedidoNegocio = new PedidoNegocio();
+
+                MesaNegocio mesaNegocio = new MesaNegocio();
+
                 if (!IsPostBack)
                 {
                     UsuarioNegocio negocio = new UsuarioNegocio();
@@ -28,18 +28,24 @@ namespace Resto_Web
                     ddlMesero.DataBind();
                 }
 
-                string id = Request.QueryString["IdMesa"] != null ? Request.QueryString["IdMesa"].ToString() : "";
-                if (!IsPostBack)
+                if (!IsPostBack && pedidoNegocio.listar(int.Parse(idMesa)) == null)
                 {
-                    MesaNegocio mesaNegocio = new MesaNegocio();
+                    // Setup Pantalla
 
-                    PedidoNegocio pedidoNegocio = new PedidoNegocio();
-
-                    Mesa seleccionada = mesaNegocio.listar(int.Parse(id));
+                    Mesa seleccionada = mesaNegocio.listar(int.Parse(idMesa));
 
                     txtNumeroMesa.Text = seleccionada.NumeroMesa.ToString();
 
                     txtNumeroPedido.Text = pedidoNegocio.ultimoID().ToString();
+                } else if (!IsPostBack)
+                {
+                    Pedido pedido = pedidoNegocio.listar(int.Parse(idMesa));
+
+                    txtNumeroPedido.Text = pedido.Id.ToString();
+                    Mesa seleccionada = mesaNegocio.listar(pedido.IdMesa);
+                    txtNumeroMesa.Text = seleccionada.NumeroMesa.ToString();
+                    txtNombreCliente.Text = pedido.NombreCliente;
+                    ddlMesero.SelectedValue = pedido.IdMesero.ToString();
                 }
 
             }
@@ -72,6 +78,8 @@ namespace Resto_Web
                 pedidoNegocio.agregar(nuevo);
                 mesaNegocio.modificar(mesa);
 
+                Session.Add("pedido-mesa" + idMesa, nuevo);
+
                 Response.Redirect("Default.aspx", false);
             }
             catch (Exception ex)
@@ -79,6 +87,11 @@ namespace Resto_Web
                 Session.Add("error", ex.ToString());
                 Response.Redirect("error.aspx");
             }
+        }
+
+        protected void btnTerminarPedido_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
