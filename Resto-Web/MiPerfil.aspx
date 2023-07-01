@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="MiPerfil.aspx.cs" Inherits="Resto_Web.MiPerfil" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -22,7 +23,6 @@
                 <label class="form-label">Fecha de Nacimiento</label>
                 <asp:TextBox runat="server" CssClass="form-control" ID="txtFechaNacimiento" TextMode="Date" />
             </div>
-
         </div>
         <div class="col-md-4">
             <div class="mb-3">
@@ -31,9 +31,7 @@
             </div>
             <asp:Image ID="imgNuevoPerfil" ImageUrl="./Images/Design/no_image.svg"
                 runat="server" CssClass="img-fluid mb-3" />
-
         </div>
-
     </div>
     <div class="row">
         <div class="col-md-4">

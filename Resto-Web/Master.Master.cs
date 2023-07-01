@@ -1,12 +1,6 @@
 ﻿using Dominio;
-using Microsoft.Win32;
 using Negocio;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace Resto_Web
 {

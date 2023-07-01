@@ -32,12 +32,9 @@
                     <asp:Button ID="btnagregarTipo" runat="server" Text="Agregar" CssClass="btn btn-primary mb-3" OnClick="btnagregarTipo_Click" />
                 </div>
             </div>
-
             <div class="row">
                 <a href="Menu.aspx" class="btn btn-warning">Volver</a>
             </div>
         </div>
     </div>
-
-
 </asp:Content>

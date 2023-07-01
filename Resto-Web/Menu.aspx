@@ -2,17 +2,18 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
-        #container-img {
-            min-height: 300px;
-            max-height: 300px;
-        }
-
         #ContentPlaceHolder1_btnRecargarFiltros {
             margin-top: 38px;
         }
 
         ContentPlaceHolder1_chkCombinarFiltros {
             margin-top: 38px;
+        }
+
+        .card-img-top {
+            width: 100%;
+            height: 15vw;
+            object-fit: cover;
         }
     </style>
 </asp:Content>
@@ -75,10 +76,7 @@
                         <ItemTemplate>
                             <div class="col">
                                 <div class="card h-100">
-                                    <div id="container-img">
-                                        <img src="<%# "/Images/Platos/" + Eval("ImagenURL") %>" class="card-img-top img-fluid" alt="..." onerror="this.onerror=null; this.src='Images/Design/no_image.svg'">
-                                    </div>
-
+                                    <img src="<%# "/Images/Platos/" + Eval("ImagenURL") %>" class="card-img-top img-fluid" alt="..." onerror="this.onerror=null; this.src='Images/Design/no_image.svg'">
                                     <div class="card-body">
                                         <h5 class="card-title"><%# Eval("Nombre") %></h5>
                                         <p class="card-text">Stock: <%# Eval("Stock") %></p>
@@ -99,7 +97,6 @@
                             </div>
                         </ItemTemplate>
                     </asp:Repeater>
-
                 </div>
             </div>
         </ContentTemplate>

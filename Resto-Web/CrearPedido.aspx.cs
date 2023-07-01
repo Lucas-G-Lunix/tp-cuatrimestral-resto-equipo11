@@ -33,14 +33,15 @@ namespace Resto_Web
 
                 if (!IsPostBack && (pedidoNegocio.listar(int.Parse(idMesa))).NombreCliente == null)
                 {
-                        // Setup Pantalla
+                    // Setup Pantalla
 
-                        Mesa seleccionada = mesaNegocio.listar(int.Parse(idMesa));
+                    Mesa seleccionada = mesaNegocio.listar(int.Parse(idMesa));
 
-                        txtNumeroMesa.Text = seleccionada.NumeroMesa.ToString();
+                    txtNumeroMesa.Text = seleccionada.NumeroMesa.ToString();
 
-                        txtNumeroPedido.Text = pedidoNegocio.ultimoID().ToString();
-                } else if (!IsPostBack)
+                    txtNumeroPedido.Text = pedidoNegocio.ultimoID().ToString();
+                }
+                else if (!IsPostBack)
                 {
                     Pedido pedido = pedidoNegocio.listar(int.Parse(idMesa));
 

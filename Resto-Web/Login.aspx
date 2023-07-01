@@ -10,31 +10,22 @@
                     <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
                         <div class="card-body p-4 p-md-5">
                             <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Log In</h3>
-
                             <div class="row">
                                 <div class="mb-4 pb-2">
-
                                     <div class="form-outline">
                                         <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" CssClass="form-control form-control-lg"></asp:TextBox>
                                         <label class="form-label" for="txtEmail">Email</label>
                                     </div>
-
                                 </div>
-
                             </div>
-
                             <div class="row">
-
                                 <div class="mb-4 pb-2">
-
                                     <div class="form-outline">
                                         <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control form-control-lg" TextMode="Password"></asp:TextBox>
                                         <label class="form-label" for="txtPassword">Contraseña</label>
                                     </div>
-
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="mb-4 pb-2">
                                     <div class="form-outline">

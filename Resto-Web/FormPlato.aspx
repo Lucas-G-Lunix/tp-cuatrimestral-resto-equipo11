@@ -44,7 +44,7 @@
 
                 <div class="mb-3">
                     <label class="form-label">Imagen Plato</label>
-                    <input type="file" id="txtImagen" runat="server" class="form-control"/>
+                    <input type="file" id="txtImagen" runat="server" class="form-control" />
                 </div>
 
                 <div class="row">

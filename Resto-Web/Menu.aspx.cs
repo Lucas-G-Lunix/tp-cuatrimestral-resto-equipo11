@@ -2,9 +2,6 @@
 using Negocio;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace Resto_Web
@@ -35,7 +32,7 @@ namespace Resto_Web
         protected void btnModificarPlato_Click(object sender, EventArgs e)
         {
             string valor = ((Button)sender).CommandArgument;
-            Response.Redirect("FormPlato.aspx?IdPlato=" +  valor, false);
+            Response.Redirect("FormPlato.aspx?IdPlato=" + valor, false);
         }
 
         protected void btnEliminarPlato_Click(object sender, EventArgs e)
@@ -131,7 +128,8 @@ namespace Resto_Web
             try
             {
 
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 Session.Add("Error", ex);
             }

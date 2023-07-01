@@ -13,10 +13,8 @@
 </head>
 <body>
     <form id="form1" runat="server">
-
         <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
             <div class="container-fluid">
-
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <a class="navbar-brand mt-2 mt-lg-0" href="#">Resto</a>
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -28,33 +26,29 @@
                         </li>
                     </ul>
                 </div>
-
                 <div class="d-flex align-items-center">
-
                     <%if (Session["usuario"] == null)
                         { %>
-                        <a class="btn btn-primary me-3" href="Login.aspx">
-                        Login
+                    <a class="btn btn-primary me-3" href="Login.aspx">Login
                         <i class="bi bi-box-arrow-in-right"></i>
                     </a>
-                    <a class="btn btn-primary me-3" href="Registrarse.aspx">
-                        Registrarse
+                    <a class="btn btn-primary me-3" href="Registrarse.aspx">Registrarse
                         <i class="bi bi-box-arrow-in-right"></i>
                     </a>
-                    <%} else { %>
+                    <%}
+                        else
+                        { %>
                     <asp:LinkButton ID="btnSalir" runat="server" OnClick="btnSalir_Click" CssClass="btn btn-danger me-3">
                         Salir
                         <i class="bi bi-box-arrow-in-right"></i>
                     </asp:LinkButton>
                     <% } %>
                     <a href="MiPerfil.aspx">
-                        
-                    <asp:Image ID="imgPerfil" runat="server" CssClass="rounded-circle" Height="25" loading="lazy" onerror="this.onerror=null; this.src='Images/Design/no_image.svg'" />
+                        <asp:Image ID="imgPerfil" runat="server" CssClass="rounded-circle" Height="25" loading="lazy" onerror="this.onerror=null; this.src='Images/Design/no_image.svg'" />
                     </a>
                 </div>
             </div>
         </nav>
-
         <div class="container body-content card-footer table-danger lead">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
