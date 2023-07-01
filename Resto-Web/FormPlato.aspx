@@ -55,7 +55,7 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <asp:Image ID="imgPlato" ImageUrl="./Images/Design/no_image.svg"
+                <asp:Image ID="imgPlato" ImageUrl="/Images/Design/no_image.svg" onerror="this.onerror=null; this.src='Images/Design/no_image.svg'"
                     runat="server" CssClass="img-fluid mb-3" />
             </div>
         </div>

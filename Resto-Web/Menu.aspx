@@ -2,9 +2,9 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
-
         #container-img {
             min-height: 300px;
+            max-height: 300px;
         }
 
         #ContentPlaceHolder1_btnRecargarFiltros {
@@ -26,7 +26,7 @@
                         <% if (Negocio.Seguridad.esAdmin(Session["usuario"]))
                             { %>
                         <a href="FormPlato.aspx" class="btn btn-outline-success">Agregar Plato</a>
-                        
+
                         <a href="AdministrarCategoria.aspx" class="btn btn-outline-info">Administrar Categorias</a>
 
                         <a href="AdministrarTipo.aspx" class="btn btn-outline-warning">Administrar Tipo</a>
@@ -52,23 +52,22 @@
                         <div class="row align-items-end gap-0">
                             <div class="col">
                                 <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="chkCombinarFiltros" runat="server">
-                                <label class="form-check-label" for="chkCombinarFiltros">
-                                    Combinar Filtros
-                                </label>
-                            </div>
+                                    <input class="form-check-input" type="checkbox" value="" id="chkCombinarFiltros" runat="server">
+                                    <label class="form-check-label" for="chkCombinarFiltros">
+                                        Combinar Filtros
+                                    </label>
                                 </div>
-                        <div class="col">
-                            <asp:LinkButton ID="btnRecargarFiltros" runat="server" CssClass="btn btn-primary" OnClick="btnRecargarFiltros_Click">
-                                <i class="bi bi-arrow-clockwise"></i> Recargar Filtros
-                            </asp:LinkButton>
-                        </div>
                             </div>
+                            <div class="col">
+                                <asp:LinkButton ID="btnRecargarFiltros" runat="server" CssClass="btn btn-primary" OnClick="btnRecargarFiltros_Click">
+                                <i class="bi bi-arrow-clockwise"></i> Recargar Filtros
+                                </asp:LinkButton>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="row my-2 ms-2">
-                    
                 </div>
 
                 <div class="row row-cols-1 row-cols-md-4 g-4">
@@ -77,7 +76,7 @@
                             <div class="col">
                                 <div class="card h-100">
                                     <div id="container-img">
-                                        <img src="<%# "/Images/Platos/" + Eval("ImagenURL") %>" class="card-img-top img-fluid"  alt="..." onerror="this.onerror=null; this.src='Images/Design/no_image.svg'">
+                                        <img src="<%# "/Images/Platos/" + Eval("ImagenURL") %>" class="card-img-top img-fluid" alt="..." onerror="this.onerror=null; this.src='Images/Design/no_image.svg'">
                                     </div>
 
                                     <div class="card-body">
@@ -86,16 +85,14 @@
                                         <p class="card-text">Tipo: <%# Eval("Tipo") %></p>
                                         <p class="card-text">Categoria: <%# Eval("Categoria") %></p>
                                         <p class="card-text">Precio: <%# Convert.ToInt32(Eval("Precio")) %> $</p>
-                                        <%--
-                                    Si tiene pedido asignado mostrar Detalle pedido
-                                    <asp:Button ID="btnDetallePedido" runat="server" Text="Mostrar Pedido" CssClass="btn btn-primary" />
-                                    
-                                <asp:Button ID="btnCrearPedido" runat="server" Text="Crear Pedido" CssClass="btn btn-primary" />
-                                        --%>
+
                                         <% if (Negocio.Seguridad.esAdmin(Session["usuario"]))
                                             { %>
-                                        <asp:Button ID="btnModificarPlato" runat="server" Text="Modificar" CssClass="btn btn-warning" OnClick="btnModificarPlato_Click" CommandArgument='<%# Eval("Id") %>' CommandName="Id" />
-                                        <asp:Button ID="btnEliminarPlato" runat="server" Text="Eliminar" CssClass="btn btn-danger" OnClick="btnEliminarPlato_Click" CommandArgument='<%# Eval("Id") %>' CommandName="Id" />
+                                        <hr />
+                                        <div class="d-grid gap-2 d-md-block">
+                                            <asp:Button ID="btnModificarPlato" runat="server" Text="Modificar" CssClass="btn btn-warning" OnClick="btnModificarPlato_Click" CommandArgument='<%# Eval("Id") %>' CommandName="Id" />
+                                            <asp:Button ID="btnEliminarPlato" runat="server" Text="Eliminar" CssClass="btn btn-danger" OnClick="btnEliminarPlato_Click" CommandArgument='<%# Eval("Id") %>' CommandName="Id" />
+                                        </div>
                                         <% } %>
                                     </div>
                                 </div>

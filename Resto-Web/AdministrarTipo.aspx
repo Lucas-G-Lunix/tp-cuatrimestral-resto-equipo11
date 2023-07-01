@@ -23,20 +23,20 @@
             </div>
         </div>
         <div class="row">
-                <h1>Agregar Tipo</h1>
-                <div class="row">
-                    <div class="col-auto">
-                        <asp:TextBox ID="txtNuevoTipo" runat="server" CssClass="form-control"></asp:TextBox>
-                    </div>
-                    <div class="col-auto">
-                        <asp:Button ID="btnagregarTipo" runat="server" Text="Agregar" CssClass="btn btn-primary mb-3" OnClick="btnagregarTipo_Click"/>
-                    </div>
-                </div>
-            
+            <h1>Agregar Tipo</h1>
             <div class="row">
-                        <a href="Menu.aspx" class="btn btn-warning">Volver</a>
+                <div class="col-auto">
+                    <asp:TextBox ID="txtNuevoTipo" runat="server" CssClass="form-control"></asp:TextBox>
+                </div>
+                <div class="col-auto">
+                    <asp:Button ID="btnagregarTipo" runat="server" Text="Agregar" CssClass="btn btn-primary mb-3" OnClick="btnagregarTipo_Click" />
+                </div>
             </div>
+
+            <div class="row">
+                <a href="Menu.aspx" class="btn btn-warning">Volver</a>
             </div>
+        </div>
     </div>
 
 

@@ -11,8 +11,11 @@ namespace Resto_Web
         {
             try
             {
-
                 string idMesa = Request.QueryString["IdMesa"] != null ? Request.QueryString["IdMesa"].ToString() : "";
+                if (Request.QueryString["IdMesa"] == null)
+                {
+                    Response.Redirect("Default.aspx", false);
+                }
                 PedidoNegocio pedidoNegocio = new PedidoNegocio();
 
                 MesaNegocio mesaNegocio = new MesaNegocio();
@@ -28,15 +31,15 @@ namespace Resto_Web
                     ddlMesero.DataBind();
                 }
 
-                if (!IsPostBack && pedidoNegocio.listar(int.Parse(idMesa)) == null)
+                if (!IsPostBack && (pedidoNegocio.listar(int.Parse(idMesa))).NombreCliente == null)
                 {
-                    // Setup Pantalla
+                        // Setup Pantalla
 
-                    Mesa seleccionada = mesaNegocio.listar(int.Parse(idMesa));
+                        Mesa seleccionada = mesaNegocio.listar(int.Parse(idMesa));
 
-                    txtNumeroMesa.Text = seleccionada.NumeroMesa.ToString();
+                        txtNumeroMesa.Text = seleccionada.NumeroMesa.ToString();
 
-                    txtNumeroPedido.Text = pedidoNegocio.ultimoID().ToString();
+                        txtNumeroPedido.Text = pedidoNegocio.ultimoID().ToString();
                 } else if (!IsPostBack)
                 {
                     Pedido pedido = pedidoNegocio.listar(int.Parse(idMesa));

@@ -65,16 +65,50 @@ namespace Negocio
             Pedido pedido = new Pedido();
             try
             {
-                datos.setearConsulta("SELECT NombreCliente, IdMesa, IdUser, Fecha FROM PEDIDOS WHERE IdMesa = @Id");
+                datos.setearConsulta("SELECT Id, NombreCliente, IdMesa, IdUser, Fecha FROM PEDIDOS WHERE IdMesa = @Id");
                 datos.setearParametro("@Id", idMesa);
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {
-                    pedido.NombreCliente = (string)datos.Lector["NombreCliente"];
-                    pedido.IdMesa = (int)datos.Lector["IdMesa"];
-                    pedido.IdMesero = (int)datos.Lector["IdUser"];
+                    if (!(datos.Lector["Id"] is DBNull))
+                        pedido.Id = (int)datos.Lector["Id"];
+                    if (!(datos.Lector["NombreCliente"] is DBNull))
+                        pedido.NombreCliente = (string)datos.Lector["NombreCliente"];
+                    if (!(datos.Lector["IdMesa"] is DBNull))
+                        pedido.IdMesa = (int)datos.Lector["IdMesa"];
+                    if (!(datos.Lector["IdUser"] is DBNull))
+                        pedido.IdMesero = (int)datos.Lector["IdUser"];
                 }
                 return pedido;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public bool tienePedido(int idMesa)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            Pedido pedido = new Pedido();
+            try
+            {
+                datos.setearConsulta("SELECT Id, NombreCliente, IdMesa, IdUser, Fecha FROM PEDIDOS WHERE IdMesa = @Id");
+                datos.setearParametro("@Id", idMesa);
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    if (datos.Lector["Id"] is DBNull)
+                    {
+                        return true;
+                    }
+                }
+                return false;
             }
             catch (Exception)
             {
