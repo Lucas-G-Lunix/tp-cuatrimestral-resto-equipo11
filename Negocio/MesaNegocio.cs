@@ -121,8 +121,8 @@ namespace Negocio
             try
             {
                 datos.setearConsulta("UPDATE MESAS SET IdPedido = @IdPedido, IdMesero = @IdMesero WHERE Id = @Id");
-                datos.setearParametro("@IdPedido", nuevo.IdPedido);
-                datos.setearParametro("@IdMesero", nuevo.IdMesero);
+                datos.setearParametro("@IdPedido", (object)nuevo.IdPedido ?? DBNull.Value);
+                datos.setearParametro("@IdMesero", (object)nuevo.IdMesero ?? DBNull.Value);
                 datos.setearParametro("@Id", nuevo.Id);
                 datos.ejecutarAccion();
             }

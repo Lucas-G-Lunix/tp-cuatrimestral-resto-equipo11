@@ -1,6 +1,6 @@
 ﻿namespace Dominio
 {
-    internal class DetallePedido
+    public class DetallePedido
     {
         public int Id { get; set; }
 

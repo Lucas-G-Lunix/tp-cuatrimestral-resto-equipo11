@@ -22,17 +22,19 @@
     <asp:UpdatePanel ID="upMenu" runat="server">
         <ContentTemplate>
             <div class="container my-3">
+                <asp:Panel ID="panelNotifications" runat="server">
+                </asp:Panel>
                 <div class="row my-1">
                     <div class="input-group my-2">
                         <div class="d-grid gap-3 d-md-block mx-2">
                             <% if (Negocio.Seguridad.esAdmin(Session["usuario"]))
-                            { %>
-                        <a href="FormPlato.aspx" class="btn btn-outline-success">Agregar Plato</a>
+                                { %>
+                            <a href="FormPlato.aspx" class="btn btn-outline-success">Agregar Plato</a>
 
-                        <a href="AdministrarCategoria.aspx" class="btn btn-outline-info">Administrar Categorias</a>
+                            <a href="AdministrarCategoria.aspx" class="btn btn-outline-info">Administrar Categorias</a>
 
-                        <a href="AdministrarTipo.aspx" class="btn btn-outline-primary">Administrar Tipo</a>
-                        <% } %>
+                            <a href="AdministrarTipo.aspx" class="btn btn-outline-primary">Administrar Tipo</a>
+                            <% } %>
                         </div>
                         <asp:TextBox ID="txtFiltrar" runat="server" AutoPostBack="true" CssClass="form-control rounded mx-1" placeholder="Buscar" aria-describedby="search-addon" OnTextChanged="txtFiltrar_TextChanged"></asp:TextBox>
                         <span class="input-group-text border-2 mx-2">
@@ -85,20 +87,36 @@
                                         <p class="card-text">Tipo: <%# Eval("Tipo") %></p>
                                         <p class="card-text">Categoria: <%# Eval("Categoria") %></p>
                                         <p class="card-text">Precio: <%# Convert.ToInt32(Eval("Precio")) %> $</p>
-
-                                        <% if (Negocio.Seguridad.esAdmin(Session["usuario"]))
-                                            { %>
                                         <hr />
                                         <div class="d-grid gap-2 d-md-block">
+                                            <% if (Request.QueryString["IdPedido"] != null)
+                                                { %>
+                                            <h6>Cantidad</h6>
+                                            <div class="d-flex mb-2">
+                                                <input id="txtCantidad<%# Eval("Id") %>" name="txtCantidad<%# Eval("Id") %>" min="1" value="1" type="number" class="form-control form-control-sm" />
+                                            </div>
+                                            <asp:Button ID="btnAgregarAlPedido" runat="server" Text="Agregar Al Pedido" CssClass="btn btn-success" OnClick="btnAgregarAlPedido_Click" CommandArgument='<%# Eval("Id") %>' CommandName="Id" />
+                                            <% }
+                                                else
+                                                { %>
+                                            <% if (Negocio.Seguridad.esAdmin(Session["usuario"]))
+                                                { %>
                                             <asp:Button ID="btnModificarPlato" runat="server" Text="Modificar" CssClass="btn btn-warning" OnClick="btnModificarPlato_Click" CommandArgument='<%# Eval("Id") %>' CommandName="Id" />
                                             <asp:Button ID="btnEliminarPlato" runat="server" Text="Eliminar" CssClass="btn btn-danger" OnClick="btnEliminarPlato_Click" CommandArgument='<%# Eval("Id") %>' CommandName="Id" />
+                                            <% } %>
+                                            <% } %>
                                         </div>
-                                        <% } %>
                                     </div>
                                 </div>
                             </div>
                         </ItemTemplate>
                     </asp:Repeater>
+                    <div class="position-fixed" style="position: fixed; bottom: 20px; right: 20px;">
+                        <% if (Request.QueryString["IdPedido"] != null)
+                            { %>
+                        <asp:Button ID="btnFinalizarPedido" runat="server" Text="Finalizar Pedido" CssClass="btn btn-success" OnClick="btnFinalizarPedido_Click" />
+                        <% } %>
+                    </div>
                 </div>
             </div>
         </ContentTemplate>

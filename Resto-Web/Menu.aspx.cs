@@ -2,6 +2,8 @@
 using Negocio;
 using System;
 using System.Collections.Generic;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace Resto_Web
@@ -12,6 +14,7 @@ namespace Resto_Web
         {
             if (!IsPostBack)
             {
+                panelNotifications.Enabled = false;
                 RecargarMenu();
                 EtiquetaNegocio negocio = new EtiquetaNegocio();
                 List<Etiqueta> listaTipo = negocio.listar(true);
@@ -146,6 +149,34 @@ namespace Resto_Web
         protected void btnRecargarFiltros_Click(object sender, EventArgs e)
         {
             RecargarMenu();
+        }
+
+        protected void btnAgregarAlPedido_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string idPlato = ((Button)sender).CommandArgument;
+                string idPedido = Request.QueryString["IdPedido"] != null ? Request.QueryString["IdPedido"].ToString() : "";
+                string cantidad = String.Format("{0}", Request.Form["txtCantidad" + idPlato]);
+                DetallePedido detallePedido = new DetallePedido();
+                detallePedido.IdPlato = int.Parse(idPlato);
+                detallePedido.IdPedido = int.Parse(idPedido);
+                detallePedido.Cantidad = int.Parse(cantidad);
+                DetallePedidoNegocio detallePedidoNegocio = new DetallePedidoNegocio();
+                detallePedidoNegocio.agregar(detallePedido);
+            }
+            catch (Exception ex)
+            {
+                string Error = ex.Message.Contains("Hay platos duplicados") ? "Hay platos duplicados" : "Otro Error";
+                string html = "<div class=\"toast-body\"> Ya existe el plato en el pedido</div>";
+                panelNotifications.Controls.Add(new LiteralControl(html));
+            }
+        }
+
+        protected void btnFinalizarPedido_Click(object sender, EventArgs e)
+        {
+            string idMesa = Request.QueryString["IdMesa"] != null ? Request.QueryString["IdMesa"].ToString() : "";
+            Response.Redirect("CrearPedido.aspx?IdMesa=" + idMesa);
         }
     }
 }

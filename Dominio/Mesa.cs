@@ -6,8 +6,8 @@
 
         public int NumeroMesa { get; set; }
 
-        public int IdMesero { get; set; }
+        public int? IdMesero { get; set; }
 
-        public int IdPedido { get; set; }
+        public int? IdPedido { get; set; }
     }
 }
