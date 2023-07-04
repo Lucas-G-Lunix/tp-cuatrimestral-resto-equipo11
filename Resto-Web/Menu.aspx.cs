@@ -12,9 +12,9 @@ namespace Resto_Web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            panelNotificaciones.Visible = false;
             if (!IsPostBack)
             {
-                panelNotifications.Enabled = false;
                 RecargarMenu();
                 EtiquetaNegocio negocio = new EtiquetaNegocio();
                 List<Etiqueta> listaTipo = negocio.listar(true);
@@ -29,6 +29,20 @@ namespace Resto_Web
                 ddlCategoria.DataValueField = "Id";
                 ddlCategoria.DataTextField = "Descripcion";
                 ddlCategoria.DataBind();
+            }
+            if (Request.QueryString["plato"] != null)
+            {
+                if (Convert.ToBoolean(Request.QueryString["plato"]))
+                {
+                    lblNotification.Text = "Plato agregado";
+                    divNotifications.Attributes["class"] = "alert alert-success alert-dismissible fade show alert-fixed";
+                    panelNotificaciones.Visible = true;
+                } else
+                {
+                    lblNotification.Text = "Plato modificado";
+                    divNotifications.Attributes["class"] = "alert alert-info alert-dismissible fade show alert-fixed";
+                    panelNotificaciones.Visible = true;
+                }
             }
         }
 
@@ -126,18 +140,6 @@ namespace Resto_Web
             }
         }
 
-        protected void filtrosCombinados()
-        {
-            try
-            {
-
-            }
-            catch (Exception ex)
-            {
-                Session.Add("Error", ex);
-            }
-        }
-
         protected void RecargarMenu()
         {
             PlatoNegocio platoNegocio = new PlatoNegocio();
@@ -153,9 +155,9 @@ namespace Resto_Web
 
         protected void btnAgregarAlPedido_Click(object sender, EventArgs e)
         {
+            string idPlato = ((Button)sender).CommandArgument;
             try
             {
-                string idPlato = ((Button)sender).CommandArgument;
                 string idPedido = Request.QueryString["IdPedido"] != null ? Request.QueryString["IdPedido"].ToString() : "";
                 string cantidad = String.Format("{0}", Request.Form["txtCantidad" + idPlato]);
                 DetallePedido detallePedido = new DetallePedido();
@@ -167,9 +169,10 @@ namespace Resto_Web
             }
             catch (Exception ex)
             {
-                string Error = ex.Message.Contains("Hay platos duplicados") ? "Hay platos duplicados" : "Otro Error";
-                string html = "<div class=\"toast-body\"> Ya existe el plato en el pedido</div>";
-                panelNotifications.Controls.Add(new LiteralControl(html));
+                string Error = ex.Message.Contains("Hay platos duplicados") ? "El plato ya se encuentra en el pedido" : "Otro Error";
+                lblNotification.Text = Error;
+                divNotifications.Attributes["class"] = "alert alert-warning alert-dismissible fade show alert-fixed";
+                panelNotificaciones.Visible = true;
             }
         }
 

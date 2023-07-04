@@ -25,12 +25,13 @@
                     <label for="txtID" class="form-label">Nombre Cliente</label>
                     <asp:TextBox runat="server" ID="txtNombreCliente" CssClass="form-control" />
                 </div>
-
+                <% if (Negocio.Seguridad.esAdmin(Session["usuario"]))
+                    { %>
                 <div class="mb-3">
                     <label for="txtTipo" class="form-label">Seleccione el mesero a asignar el pedido:</label>
                     <asp:DropDownList ID="ddlMesero" CssClass="form-select" runat="server"></asp:DropDownList>
                 </div>
-
+                <% } %>
                 <div class="row">
                     <div class="col">
                         <asp:Button Text="Guardar" CssClass="btn btn-success" ID="btnGuardar" runat="server" OnClick="btnGuardar_Click" />

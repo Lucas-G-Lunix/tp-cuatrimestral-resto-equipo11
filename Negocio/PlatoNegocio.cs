@@ -154,7 +154,7 @@ namespace Negocio
                 datos.setearParametro("@Tipo", nuevo.Tipo.Id);
                 datos.setearParametro("@Categoria", nuevo.Categoria.Id);
                 datos.setearParametro("@Precio", nuevo.Precio);
-                datos.setearParametro("@ImagenUrl", nuevo.ImagenURL);
+                datos.setearParametro("@ImagenUrl", (object)nuevo.ImagenURL ?? DBNull.Value);
                 datos.ejecutarAccion();
             }
             catch (Exception)

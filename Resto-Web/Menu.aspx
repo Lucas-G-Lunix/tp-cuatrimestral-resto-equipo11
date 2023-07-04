@@ -15,6 +15,14 @@
             height: 15vw;
             object-fit: cover;
         }
+        .alert-fixed {
+            position: fixed;
+            top: 56px;
+            left: 0px;
+            width: 100%;
+            z-index: 9999;
+            border-radius: 0px
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -22,8 +30,12 @@
     <asp:UpdatePanel ID="upMenu" runat="server">
         <ContentTemplate>
             <div class="container my-3">
-                <asp:Panel ID="panelNotifications" runat="server">
-                </asp:Panel>
+                <asp:Panel ID="panelNotificaciones" runat="server">
+                    <div role="alert" id="divNotifications" runat="server" class="">
+                        <asp:Label ID="lblNotification" runat="server" Text="Label"></asp:Label>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+            </asp:Panel>
                 <div class="row my-1">
                     <div class="input-group my-2">
                         <div class="d-grid gap-3 d-md-block mx-2">

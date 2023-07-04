@@ -34,7 +34,7 @@ namespace Resto_Web
                     ddlMesero.DataBind();
                 }
 
-                if (!IsPostBack && (pedidoNegocio.listar(int.Parse(idMesa))).NombreCliente == null)
+                if (!IsPostBack && (mesaNegocio.listar(int.Parse(idMesa))).IdPedido == null)
                 {
                     // Setup Pantalla
 
@@ -43,8 +43,11 @@ namespace Resto_Web
                     txtNumeroMesa.Text = seleccionada.NumeroMesa.ToString();
 
                     txtNumeroPedido.Text = pedidoNegocio.ultimoID().ToString();
+
+                    btnAgregarProductos.Enabled = false;
+                    btnFinalizarPedido.Enabled = false;
                 }
-                else if (!IsPostBack && (pedidoNegocio.listar(int.Parse(idMesa))).NombreCliente != null)
+                else if (!IsPostBack && (mesaNegocio.listar(int.Parse(idMesa))).IdPedido != null)
                 {
                     Pedido pedido = pedidoNegocio.listar(int.Parse(idMesa));
 
@@ -88,7 +91,7 @@ namespace Resto_Web
                 mesaNegocio.modificar(mesa);
 
 
-                Response.Redirect("Default.aspx", false);
+                Response.Redirect("CrearPedido.aspx?IdMesa=" + idMesa, false);
             }
             catch (Exception ex)
             {

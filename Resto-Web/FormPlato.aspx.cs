@@ -105,13 +105,14 @@ namespace Resto_Web
                 {
                     nuevo.Id = int.Parse(txtId.Text);
                     negocio.modificar(nuevo);
+                    Response.Redirect("Menu.aspx?plato=false", false);
                 }
                 else
                 {
                     negocio.agregar(nuevo);
+                    Response.Redirect("Menu.aspx?plato=true", false);
                 }
 
-                Response.Redirect("Menu.aspx", false);
             }
             catch (Exception ex)
             {
