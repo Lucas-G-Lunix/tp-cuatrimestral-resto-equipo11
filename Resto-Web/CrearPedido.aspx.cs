@@ -50,13 +50,22 @@ namespace Resto_Web
                 else if (!IsPostBack && (mesaNegocio.listar(int.Parse(idMesa))).IdPedido != null)
                 {
                     Pedido pedido = pedidoNegocio.listar(int.Parse(idMesa));
+                    DetallePedidoNegocio detallePedidoNegocio = new DetallePedidoNegocio();
+                    List<DetallePedido> detallePedidos = detallePedidoNegocio.listar(pedido.Id);
 
                     txtNumeroPedido.Text = pedido.Id.ToString();
                     Mesa seleccionada = mesaNegocio.listar(pedido.IdMesa);
                     txtNumeroMesa.Text = seleccionada.NumeroMesa.ToString();
                     txtNombreCliente.Text = pedido.NombreCliente;
                     ddlMesero.SelectedValue = pedido.IdMesero.ToString();
-
+                    int totalPagar = 0;
+                    foreach (DetallePedido item in detallePedidos)
+                    {
+                        PlatoNegocio platoListar = new PlatoNegocio();
+                        Plato plato = platoListar.listar(item.IdPlato);
+                        totalPagar += item.Cantidad * (int)plato.Precio;
+                    }
+                    lblTotalPagar.Text = "Total a Pagar" + totalPagar.ToString() + "$";
                     RecargarPlatos();
                 }
 
@@ -188,6 +197,12 @@ namespace Resto_Web
             List<DetallePedido> detallePedido = detallePedidoNegocio.listar(pedido.Id);
             rpPlatosPedido.DataSource = detallePedido;
             rpPlatosPedido.DataBind();
-        }        
+        }
+
+        protected void btnGenerarTicket_Click(object sender, EventArgs e)
+        {
+            string idMesa = Request.QueryString["IdMesa"] != null ? Request.QueryString["IdMesa"].ToString() : "";
+            Response.Redirect("GenerarTicket.aspx?IdPedido=" + txtNumeroPedido.Text + "&NumeroMesa=" + txtNumeroMesa.Text + "&IdMesa=" + idMesa);
+        }
     }
 }

@@ -30,6 +30,10 @@
                     <asp:DropDownList ID="ddlMesero" CssClass="form-select" runat="server"></asp:DropDownList>
                 </div>
                 <% } %>
+
+                <div class="mb-3">
+                    <asp:Label ID="lblTotalPagar" runat="server" Text="" CssClass="form-label"></asp:Label>
+                </div>
                 <div class="row">
                     <div class="col">
                         <asp:Button Text="Guardar" CssClass="btn btn-success" ID="btnGuardar" runat="server" OnClick="btnGuardar_Click" OnClientClick="return validar()" autopostback="false"/>
@@ -42,8 +46,8 @@
                 <div class="d-flex">
                     <asp:UpdatePanel ID="upPlatos" runat="server">
                         <ContentTemplate>
-                            <div class="col">
-                                <div class="overflow-auto" style="height: 600px" data-bs-spy="scroll">
+                            <div class="col" id="listaPedidos">
+                                <div class="overflow-auto" style="height: 600px" data-bs-spy="scroll" >
                                     <asp:Repeater ID="rpPlatosPedido" runat="server" OnItemDataBound="rpPlatosPedido_ItemDataBound">
                                         <ItemTemplate>
                                             <div class="card mb-3">
@@ -82,6 +86,7 @@
                                     <div class="d-grid gap-2">
                                         <asp:Button Text="Agregar Platos" CssClass="btn btn-success" ID="btnAgregarProductos" runat="server" OnClick="btnAgregarProductos_Click" />
                                         <asp:Button Text="Finalizar Pedido" CssClass="btn btn-danger" ID="btnFinalizarPedido" runat="server" OnClick="btnFinalizarPedido_Click" />
+                                        <asp:Button Text="Generar Ticket" CssClass="btn btn-success" ID="btnGenerarTicket" runat="server" OnClick="btnGenerarTicket_Click" />
                                     </div>
                                 </div>
                             </div>
@@ -92,7 +97,7 @@
             </div>
         </div>
     </div>
-    <script>
+    <script type="text/javascript">
         function validar() {
             var nombreCliente = document.getElementById("ContentPlaceHolder1_txtNombreCliente").value;
             var pattern = /^[a-zA-Z ]*$/;
@@ -106,5 +111,6 @@
             }
             return true;
         }
+
     </script>
 </asp:Content>
