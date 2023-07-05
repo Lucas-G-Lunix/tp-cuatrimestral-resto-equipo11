@@ -41,7 +41,7 @@
                                 <div class="row">
                                     <div class="mb-4 pb-2">
                                         <div class="form-outline">
-                                            <asp:TextBox ID="txtContraseña" runat="server" CssClass="form-control form-control-lg" TextMode="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Debe contener al menos un numero, una letra Mayuscula y una letra minuscula, y por lo menos 8 caracteres"></asp:TextBox>
+                                            <asp:TextBox ID="txtContraseña" runat="server" CssClass="form-control form-control-lg" TextMode="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="La contraseña debe contener al menos un numero, una letra mayuscula, una letra minuscula, y por lo menos 8 caracteres"></asp:TextBox>
                                             <label class="form-label" for="txtContraseña">Contraseña</label>
                                         </div>
                                     </div>
@@ -55,7 +55,7 @@
                                     </div>
                                     <div class="col-md-6 d-flex justify-content-center">
                                         <div class="form-outline">
-                                            <asp:Button ID="btnConfirmar" runat="server" Text="Confirmar Registro" CssClass="btn btn-success btn-block btn-lg text-body" OnClientClick="return validate()" OnClick="btnConfirmar_Click" autopostback="false" />
+                                            <asp:Button ID="btnConfirmar" runat="server" Text="Confirmar Registro" CssClass="btn btn-success btn-block btn-lg text-body" OnClientClick="return validar()" OnClick="btnConfirmar_Click" autopostback="false" />
                                         </div>
                                     </div>
                                 </div>
@@ -66,4 +66,48 @@
             </div>
         </section>
     </div>
+    <script>
+        function validar() {
+            var nombre = document.getElementById("ContentPlaceHolder1_txtNombre").value;
+            var apellido = document.getElementById("ContentPlaceHolder1_txtApellido").value;
+            var mail = document.getElementById("ContentPlaceHolder1_txtMail").value;
+            var contraseña = document.getElementById("ContentPlaceHolder1_txtContraseña").value;
+
+            var patternTexto = /^[a-zA-Z ]*$/;
+            var patternMail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+            if (nombre === "") {
+                alert("Debes completar el campo nombre");
+                return false;
+            }
+            if (!patternTexto.test(nombre)) {
+                alert("El campo nombre solo puede contener texto");
+                return false;
+            }
+
+            if (apellido === "") {
+                alert("Debes completar el campo apellido");
+                return false;
+            }
+            if (!patternTexto.test(apellido)) {
+                alert("El campo apellido solo puede contener texto");
+                return false;
+            }
+
+            if (mail === "") {
+                alert("Debes completar el campo mail");
+                return false;
+            }
+            if (!patternMail.test(mail)) {
+                alert("El mail no es valido");
+                return false;
+            }
+
+            if (contraseña === "") {
+                alert("Debes completar el campo de la contraseña");
+                return false;
+            }
+            return true;
+        }
+    </script>
 </asp:Content>

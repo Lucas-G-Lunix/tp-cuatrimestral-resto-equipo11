@@ -24,7 +24,11 @@
         </div>
         <div class="row">
             <h1>Agregar Categoria</h1>
-            <div class="row">
+            <hr />
+            <div class="mb-3 row">
+                <div class="col-auto">
+                    <label for="txtNuevoCategoria" class="form-label">Nombre Categoria</label>
+                </div>
                 <div class="col-auto">
                     <asp:TextBox ID="txtNuevoCategoria" runat="server" CssClass="form-control"></asp:TextBox>
                 </div>

@@ -78,7 +78,6 @@
     <Content Include="Menu.aspx" />
     <Content Include="MiPerfil.aspx" />
     <Content Include="Registrarse.aspx" />
-    <Content Include="Scripts\Validaciones.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
