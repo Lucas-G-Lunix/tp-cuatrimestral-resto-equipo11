@@ -17,7 +17,7 @@
         }
         .alert-fixed {
             position: fixed;
-            top: 56px;
+            top: 0px;
             left: 0px;
             width: 100%;
             z-index: 9999;
@@ -35,7 +35,7 @@
                         <asp:Label ID="lblNotification" runat="server" Text="Label"></asp:Label>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
-            </asp:Panel>
+                </asp:Panel>
                 <div class="row my-1">
                     <div class="input-group my-2">
                         <div class="d-grid gap-3 d-md-block mx-2">

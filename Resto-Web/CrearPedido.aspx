@@ -1,8 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="CrearPedido.aspx.cs" Inherits="Resto_Web.CrearPedido" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <style>
-    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager ID="smPlatos" runat="server"></asp:ScriptManager>
@@ -10,7 +8,7 @@
     <hr />
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4 needs-validation">
                 <div class="mb-3">
                     <label for="txtNumeroMesa" class="form-label">Numero Mesa</label>
                     <asp:TextBox runat="server" ID="txtNumeroMesa" CssClass="form-control" ReadOnly="true" />
@@ -22,8 +20,8 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="txtID" class="form-label">Nombre Cliente</label>
-                    <asp:TextBox runat="server" ID="txtNombreCliente" CssClass="form-control" />
+                    <label for="txtNombreCliente" class="form-label">Nombre Cliente</label>
+                    <asp:TextBox runat="server" ID="txtNombreCliente" CssClass="form-control" required/>
                 </div>
                 <% if (Negocio.Seguridad.esAdmin(Session["usuario"]))
                     { %>
@@ -34,7 +32,7 @@
                 <% } %>
                 <div class="row">
                     <div class="col">
-                        <asp:Button Text="Guardar" CssClass="btn btn-success" ID="btnGuardar" runat="server" OnClick="btnGuardar_Click" />
+                        <asp:Button Text="Guardar" CssClass="btn btn-success" ID="btnGuardar" runat="server" OnClick="btnGuardar_Click" OnClientClick="return validar()" autopostback="false"/>
                         <a href="Default.aspx" class="btn btn-warning">Volver</a>
                     </div>
                 </div>
@@ -53,7 +51,6 @@
                                                     <div class="col-md-3 d-flex">
                                                         <img style="width: 100%; object-fit: cover" src="/Images/Platos/plato-<%# Eval("IdPlato") %>.jpg" class="img-fluid rounded-start" onerror="this.onerror=null; this.src='Images/Design/no_image.svg'" />
                                                     </div>
-
                                                     <div class="col-md-8">
                                                         <div class="card-body">
                                                             <div class="container mb-3">
@@ -95,4 +92,19 @@
             </div>
         </div>
     </div>
+    <script>
+        function validar() {
+            var nombreCliente = document.getElementById("ContentPlaceHolder1_txtNombreCliente").value;
+            var pattern = /^[a-zA-Z ]*$/;
+            if (nombreCliente === "") {
+                alert("Debes completar el campo nombre del cliente");
+                return false;
+            }
+            if (!pattern.test(nombreCliente)) {
+                alert("Solo se admite texto en el nombre del cliente");
+                return false;
+            }
+            return true;
+        }
+    </script>
 </asp:Content>

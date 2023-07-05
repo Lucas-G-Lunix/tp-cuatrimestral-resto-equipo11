@@ -64,6 +64,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AdministracionUsuarios.aspx" />
     <Content Include="AdministrarCategoria.aspx" />
     <Content Include="AdministrarTipo.aspx" />
     <Content Include="CrearPedido.aspx" />
@@ -81,6 +82,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdministracionUsuarios.aspx.cs">
+      <DependentUpon>AdministracionUsuarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdministracionUsuarios.aspx.designer.cs">
+      <DependentUpon>AdministracionUsuarios.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AdministrarCategoria.aspx.cs">
       <DependentUpon>AdministrarCategoria.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

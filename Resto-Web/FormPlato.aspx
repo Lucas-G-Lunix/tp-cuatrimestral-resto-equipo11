@@ -44,12 +44,12 @@
 
                 <div class="mb-3">
                     <label class="form-label">Imagen Plato</label>
-                    <input type="file" id="txtImagen" runat="server" class="form-control" />
+                    <input type="file" id="txtImagen" runat="server" class="form-control"/>
                 </div>
 
                 <div class="row">
                     <div class="col">
-                        <asp:Button Text="Guardar" CssClass="btn btn-primary" ID="btnGuardar" runat="server" OnClick="btnGuardar_Click" />
+                        <asp:Button Text="Guardar" CssClass="btn btn-primary" ID="btnGuardar" runat="server" OnClick="btnGuardar_Click" OnClientClick="return validar();" autopostback="false" />
                         <a href="Menu.aspx" class="btn btn-warning">Volver</a>
                     </div>
                 </div>
@@ -60,4 +60,30 @@
             </div>
         </div>
     </div>
+    <script>
+        function validar() {
+            var nombrePlato = document.getElementById("ContentPlaceHolder1_txtNombre").value;
+            var stock = document.getElementById("ContentPlaceHolder1_txtStock").value;
+            var precio = document.getElementById("ContentPlaceHolder1_txtPrecio").value;
+            var patternNumeros = /^[0-9]*$/;
+            var patternTexto = /^[a-zA-Z ]*$/;
+            if (nombrePlato === "") {
+                alert("Debes completar el campo nombre del plato");
+                return false;
+            }
+            if (!patternTexto.test(nombrePlato)) {
+                alert("El campo nombre del plato solo puede contener texto");
+                return false;
+            }
+            if (!patternNumeros.test(stock)) {
+                alert("Solo se admite numeros en el campo stock");
+                return false;
+            }
+            if (!patternNumeros.test(precio)) {
+                alert("Solo se admite numeros en el campo precio");
+                return false;
+            }
+            return true;
+        }
+    </script>
 </asp:Content>

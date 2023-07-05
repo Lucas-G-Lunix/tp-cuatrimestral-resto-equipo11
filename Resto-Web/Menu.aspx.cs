@@ -166,6 +166,9 @@ namespace Resto_Web
                 detallePedido.Cantidad = int.Parse(cantidad);
                 DetallePedidoNegocio detallePedidoNegocio = new DetallePedidoNegocio();
                 detallePedidoNegocio.agregar(detallePedido);
+                lblNotification.Text = "Plato agregado al pedido";
+                divNotifications.Attributes["class"] = "alert alert-success alert-dismissible fade show alert-fixed";
+                panelNotificaciones.Visible = true;
             }
             catch (Exception ex)
             {

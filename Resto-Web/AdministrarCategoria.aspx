@@ -29,7 +29,7 @@
                     <asp:TextBox ID="txtNuevoCategoria" runat="server" CssClass="form-control"></asp:TextBox>
                 </div>
                 <div class="col-auto">
-                    <asp:Button ID="btnAgregarCategoria" runat="server" Text="Agregar" CssClass="btn btn-primary mb-3" OnClick="btnAgregarCategoria_Click" />
+                    <asp:Button ID="btnAgregarCategoria" runat="server" Text="Agregar" CssClass="btn btn-primary mb-3" OnClick="btnAgregarCategoria_Click" OnClientClick="return validar();" autopostback="false"/>
                 </div>
             </div>
             <div class="row">
@@ -37,4 +37,19 @@
             </div>
         </div>
     </div>
+    <script>
+        function validar() {
+            var nombreCategoria = document.getElementById("ContentPlaceHolder1_txtNuevoCategoria").value;
+            var patternTexto = /^[a-zA-Z ]*$/;
+            if (nombreCategoria === "") {
+                alert("Debes completar el campo con el nombre de la categoria");
+                return false;
+            }
+            if (!patternTexto.test(nombreCategoria)) {
+                alert("El campo nombre de la categoria solo puede contener texto");
+                return false;
+            }
+            return true;
+        }
+    </script>
 </asp:Content>

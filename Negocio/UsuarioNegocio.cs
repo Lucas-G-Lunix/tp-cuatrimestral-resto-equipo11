@@ -97,6 +97,57 @@ namespace Negocio
             }
         }
 
+        public void cambiarAdmin(int id, bool admin)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                if (admin)
+                {
+                    datos.setearConsulta("UPDATE USERS SET RolAdmin = 1 Where Id = @Id");
+                } else
+                {
+                    datos.setearConsulta("UPDATE USERS SET RolAdmin = 0 Where Id = @Id");
+                }
+                datos.setearParametro("@Id", id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+
+
+
+            }
+        }
+
+
+        public void eliminar(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("DELETE USERS Where Id = @Id");
+                datos.setearParametro("@Id", id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+
+
+
+            }
+        }
+
         public List<Usuario> listar()
         {
             AccesoDatos datos = new AccesoDatos();
@@ -112,6 +163,33 @@ namespace Negocio
                     usuario.Email = (string)datos.Lector["Email"];
                     usuario.Nombre = (string)datos.Lector["Nombre"];
                     usuario.Apellido = (string)datos.Lector["Apellido"];
+                    usuarios.Add(usuario);
+                }
+                return usuarios;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<Usuario> listarTodos()
+        {
+            AccesoDatos datos = new AccesoDatos();
+            List<Usuario> usuarios = new List<Usuario>();
+            try
+            {
+                datos.setearConsulta("SELECT Id, Email, Nombre, Apellido, RolAdmin FROM USERS");
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    Usuario usuario = new Usuario();
+                    usuario.Id = (int)datos.Lector["Id"];
+                    usuario.Email = (string)datos.Lector["Email"];
+                    usuario.Nombre = (string)datos.Lector["Nombre"];
+                    usuario.Apellido = (string)datos.Lector["Apellido"];
+                    usuario.RolAdmin = (bool)datos.Lector["RolAdmin"];
                     usuarios.Add(usuario);
                 }
                 return usuarios;

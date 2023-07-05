@@ -54,6 +54,8 @@ namespace Resto_Web
 
                     imgPlato.ImageUrl = seleccionado.ImagenURL;
 
+                    Session.Add("seleccionado", seleccionado);
+
 
                     if (!string.IsNullOrEmpty(seleccionado.ImagenURL))
                         imgPlato.ImageUrl = "~/Images/Platos/" + seleccionado.ImagenURL;
@@ -74,6 +76,7 @@ namespace Resto_Web
         {
             try
             {
+                Plato seleccionado = (Plato)Session["seleccionado"] != null ? (Plato)Session["seleccionado"] : null; 
                 Plato nuevo = new Plato();
                 PlatoNegocio negocio = new PlatoNegocio();
 
@@ -94,6 +97,9 @@ namespace Resto_Web
                     string ruta = Server.MapPath("./Images/Platos/");
                     txtImagen.PostedFile.SaveAs(ruta + "plato-" + nuevo.Id + ".jpg");
                     nuevo.ImagenURL = "plato-" + nuevo.Id + ".jpg";
+                } else if (seleccionado != null)
+                {
+                    nuevo.ImagenURL = seleccionado.ImagenURL;
                 }
 
                 nuevo.Tipo = new Etiqueta();
