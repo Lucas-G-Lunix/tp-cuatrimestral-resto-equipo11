@@ -191,7 +191,7 @@ namespace Resto_Web
             try
             {
                 string idMesa = Request.QueryString["IdMesa"] != null ? Request.QueryString["IdMesa"].ToString() : "";
-                Response.Redirect("CrearPedido.aspx?IdMesa=" + idMesa);
+                Response.Redirect("CrearPedido.aspx?IdMesa=" + idMesa, false);
             }
             catch (Exception ex)
             {

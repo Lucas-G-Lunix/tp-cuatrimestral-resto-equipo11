@@ -53,7 +53,7 @@
                                             <div class="card mb-3">
                                                 <div class="row g-0">
                                                     <div class="col-md-3 d-flex">
-                                                        <img style="width: 100%; object-fit: cover" src="/Images/Platos/plato-<%# Eval("IdPlato") %>.jpg" class="img-fluid rounded-start" onerror="this.onerror=null; this.src='Images/Design/no_image.svg'" />
+                                                        <img style="width: 100%; object-fit: cover" src="/Images/Platos/plato-<%#Eval("IdPlato")%>.jpg" class="img-fluid rounded-start" onerror="this.onerror=null; this.src='Images/Design/no_image.svg'" />
                                                     </div>
                                                     <div class="col-md-8">
                                                         <div class="card-body">
@@ -86,7 +86,7 @@
                                     <div class="d-grid gap-2">
                                         <asp:Button Text="Agregar Platos" CssClass="btn btn-success" ID="btnAgregarProductos" runat="server" OnClick="btnAgregarProductos_Click" />
                                         <asp:Button Text="Finalizar Pedido" CssClass="btn btn-danger" ID="btnFinalizarPedido" runat="server" OnClick="btnFinalizarPedido_Click" />
-                                        <asp:Button Text="Generar Ticket" CssClass="btn btn-success" ID="btnGenerarTicket" runat="server" OnClick="btnGenerarTicket_Click" />
+                                        <asp:Button Text="Generar Ticket" CssClass="btn btn-success" ID="btnGenerarTicket" runat="server" OnClick="btnGenerarTicket_Click"/>
                                     </div>
                                 </div>
                             </div>

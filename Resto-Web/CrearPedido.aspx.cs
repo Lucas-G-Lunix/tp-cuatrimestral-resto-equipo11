@@ -19,9 +19,8 @@ namespace Resto_Web
 
                 if (Request.QueryString["IdMesa"] != null)
                 {
-                    if (!IsPostBack && (mesaNegocio.listar(int.Parse(idMesa))).IdPedido == null)
+                    if (!IsPostBack)
                     {
-                        // Setup Pantalla
                         UsuarioNegocio negocio = new UsuarioNegocio();
                         List<Usuario> listaUsuarios = negocio.listar();
 
@@ -29,6 +28,10 @@ namespace Resto_Web
                         ddlMesero.DataValueField = "Id";
                         ddlMesero.DataTextField = "Nombre";
                         ddlMesero.DataBind();
+                    }
+                    if (!IsPostBack && (mesaNegocio.listar(int.Parse(idMesa))).IdPedido == null)
+                    {
+                        // Setup Pantalla
 
                         Mesa seleccionada = mesaNegocio.listar(int.Parse(idMesa));
 
@@ -38,6 +41,7 @@ namespace Resto_Web
 
                         btnAgregarProductos.Enabled = false;
                         btnFinalizarPedido.Enabled = false;
+                        btnGenerarTicket.Enabled = false;
                     }
                     else if (!IsPostBack && (mesaNegocio.listar(int.Parse(idMesa))).IdPedido != null)
                     {
@@ -50,13 +54,6 @@ namespace Resto_Web
                         txtNumeroMesa.Text = seleccionada.NumeroMesa.ToString();
                         txtNombreCliente.Text = pedido.NombreCliente;
                         ddlMesero.SelectedValue = pedido.IdMesero.ToString();
-                        int totalPagar = 0;
-                        foreach (DetallePedido item in detallePedidos)
-                        {
-                            Plato plato = platoNegocio.listar(item.IdPlato);
-                            totalPagar += item.Cantidad * (int)plato.Precio;
-                        }
-                        lblTotalPagar.Text = "Total a Pagar" + totalPagar.ToString() + "$";
                         RecargarPlatos();
                     }
                 }
@@ -106,7 +103,7 @@ namespace Resto_Web
             try
             {
                 string idMesa = Request.QueryString["IdMesa"] != null ? Request.QueryString["IdMesa"].ToString() : "";
-                Response.Redirect("Menu.aspx?IdPedido=" + txtNumeroPedido.Text + "&IdMesa=" + idMesa);
+                Response.Redirect("Menu.aspx?IdPedido=" + txtNumeroPedido.Text + "&IdMesa=" + idMesa, false);
             }
             catch (Exception ex)
             {
@@ -233,6 +230,14 @@ namespace Resto_Web
                 Pedido pedido = pedidoNegocio.listar(int.Parse(idMesa));
                 DetallePedidoNegocio detallePedidoNegocio = new DetallePedidoNegocio();
                 List<DetallePedido> detallePedido = detallePedidoNegocio.listar(pedido.Id);
+                PlatoNegocio platoNegocio = new PlatoNegocio();
+                int totalPagar = 0;
+                foreach (DetallePedido item in detallePedido)
+                {
+                    Plato plato = platoNegocio.listar(item.IdPlato);
+                    totalPagar += item.Cantidad * (int)plato.Precio;
+                }
+                lblTotalPagar.Text = "Total a Pagar: " + totalPagar.ToString() + "$";
                 rpPlatosPedido.DataSource = detallePedido;
                 rpPlatosPedido.DataBind();
             }

@@ -70,6 +70,7 @@
     <Content Include="CrearPedido.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Error.aspx" />
+    <Content Include="EstadisticasDiarias.aspx" />
     <Content Include="FormPlato.aspx" />
     <Content Include="GenerarTicket.aspx" />
     <Content Include="Global.asax" />
@@ -123,6 +124,13 @@
     </Compile>
     <Compile Include="Error.aspx.designer.cs">
       <DependentUpon>Error.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EstadisticasDiarias.aspx.cs">
+      <DependentUpon>EstadisticasDiarias.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EstadisticasDiarias.aspx.designer.cs">
+      <DependentUpon>EstadisticasDiarias.aspx</DependentUpon>
     </Compile>
     <Compile Include="FormPlato.aspx.cs">
       <DependentUpon>FormPlato.aspx</DependentUpon>
