@@ -53,7 +53,7 @@ namespace Resto_Web
                     PlatoNegocio platoNegocio = new PlatoNegocio();
                     Plato plato = platoNegocio.listar(detallePedido.IdPlato);
                     labelNombre.Text = plato.Nombre;
-                    labelPrecio.Text = Convert.ToInt32(plato.Precio).ToString() + "$";
+                    labelPrecio.Text = Convert.ToInt32(plato.Precio).ToString();
                 }
             }
             catch (Exception ex)
