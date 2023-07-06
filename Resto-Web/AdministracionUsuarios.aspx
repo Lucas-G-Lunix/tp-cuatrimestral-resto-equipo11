@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="AdministracionUsuarios.aspx.cs" Inherits="Resto_Web.AdministracionUsuarios" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         .noMostrar {
@@ -18,7 +19,7 @@
                         <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
                         <asp:BoundField HeaderText="Apellido" DataField="Apellido" />
                         <asp:BoundField HeaderText="Email" DataField="Email" />
-                        <asp:CheckBoxField HeaderText="Es Admin" DataField="RolAdmin" ValidateRequestMode="Enabled"/>
+                        <asp:CheckBoxField HeaderText="Es Admin" DataField="RolAdmin" ValidateRequestMode="Enabled" />
                         <asp:TemplateField HeaderText="Acciones">
                             <ItemTemplate>
                                 <asp:LinkButton ID="btnCambiarAdmin" runat="server" OnClick="btnCambiarAdmin_Click" CommandName="Id" CommandArgument='<%# ((GridViewRow) Container).RowIndex %>'>🔐</asp:LinkButton>

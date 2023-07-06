@@ -2,8 +2,6 @@
 using Negocio;
 using System;
 using System.Collections.Generic;
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace Resto_Web
@@ -12,37 +10,46 @@ namespace Resto_Web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            panelNotificaciones.Visible = false;
-            if (!IsPostBack)
+            try
             {
-                RecargarMenu();
-                EtiquetaNegocio negocio = new EtiquetaNegocio();
-                List<Etiqueta> listaTipo = negocio.listar(true);
-
-                ddlTipo.DataSource = listaTipo;
-                ddlTipo.DataValueField = "Id";
-                ddlTipo.DataTextField = "Descripcion";
-                ddlTipo.DataBind();
-
-                listaTipo = negocio.listar(false);
-                ddlCategoria.DataSource = listaTipo;
-                ddlCategoria.DataValueField = "Id";
-                ddlCategoria.DataTextField = "Descripcion";
-                ddlCategoria.DataBind();
-            }
-            if (Request.QueryString["plato"] != null)
-            {
-                if (Convert.ToBoolean(Request.QueryString["plato"]))
+                panelNotificaciones.Visible = false;
+                if (!IsPostBack)
                 {
-                    lblNotification.Text = "Plato agregado";
-                    divNotifications.Attributes["class"] = "alert alert-success alert-dismissible fade show alert-fixed";
-                    panelNotificaciones.Visible = true;
-                } else
-                {
-                    lblNotification.Text = "Plato modificado";
-                    divNotifications.Attributes["class"] = "alert alert-info alert-dismissible fade show alert-fixed";
-                    panelNotificaciones.Visible = true;
+                    RecargarMenu();
+                    EtiquetaNegocio negocio = new EtiquetaNegocio();
+                    List<Etiqueta> listaTipo = negocio.listar(true);
+
+                    ddlTipo.DataSource = listaTipo;
+                    ddlTipo.DataValueField = "Id";
+                    ddlTipo.DataTextField = "Descripcion";
+                    ddlTipo.DataBind();
+
+                    listaTipo = negocio.listar(false);
+                    ddlCategoria.DataSource = listaTipo;
+                    ddlCategoria.DataValueField = "Id";
+                    ddlCategoria.DataTextField = "Descripcion";
+                    ddlCategoria.DataBind();
                 }
+                if (Request.QueryString["plato"] != null)
+                {
+                    if (Convert.ToBoolean(Request.QueryString["plato"]))
+                    {
+                        lblNotification.Text = "Plato agregado";
+                        divNotifications.Attributes["class"] = "alert alert-success alert-dismissible fade show alert-fixed";
+                        panelNotificaciones.Visible = true;
+                    }
+                    else
+                    {
+                        lblNotification.Text = "Plato modificado";
+                        divNotifications.Attributes["class"] = "alert alert-info alert-dismissible fade show alert-fixed";
+                        panelNotificaciones.Visible = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.ToString());
+                Response.Redirect("error.aspx");
             }
         }
 
@@ -181,8 +188,16 @@ namespace Resto_Web
 
         protected void btnFinalizarPedido_Click(object sender, EventArgs e)
         {
-            string idMesa = Request.QueryString["IdMesa"] != null ? Request.QueryString["IdMesa"].ToString() : "";
-            Response.Redirect("CrearPedido.aspx?IdMesa=" + idMesa);
+            try
+            {
+                string idMesa = Request.QueryString["IdMesa"] != null ? Request.QueryString["IdMesa"].ToString() : "";
+                Response.Redirect("CrearPedido.aspx?IdMesa=" + idMesa);
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.ToString());
+                Response.Redirect("error.aspx");
+            }
         }
     }
 }

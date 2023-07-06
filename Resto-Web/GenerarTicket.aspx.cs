@@ -2,9 +2,6 @@
 using Negocio;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace Resto_Web
@@ -15,48 +12,69 @@ namespace Resto_Web
         {
             if (!IsPostBack && Request.QueryString["NumeroMesa"] != null)
             {
-                string numeroMesa = Request.QueryString["NumeroMesa"] != null ? Request.QueryString["NumeroMesa"].ToString() : "";
-                string idPedido = Request.QueryString["IdPedido"] != null ? Request.QueryString["IdPedido"].ToString() : "";
-
-                lblNumeroMesa.Text = "Numero Mesa: " + numeroMesa;
-
-
-                DetallePedidoNegocio detallePedidoNegocio = new DetallePedidoNegocio();
-                List<DetallePedido> detallePedidos = detallePedidoNegocio.listar(int.Parse(idPedido));
-                int totalPagar = 0;
-                foreach (DetallePedido item in detallePedidos)
+                try
                 {
-                    PlatoNegocio platoListar = new PlatoNegocio();
-                    Plato plato = platoListar.listar(item.IdPlato);
-                    totalPagar += item.Cantidad * (int)plato.Precio;
-                }
-                lblTotalPagar.Text = "Total a Pagar: " + totalPagar.ToString() + "$";
+                    string numeroMesa = Request.QueryString["NumeroMesa"] != null ? Request.QueryString["NumeroMesa"].ToString() : "";
+                    string idPedido = Request.QueryString["IdPedido"] != null ? Request.QueryString["IdPedido"].ToString() : "";
 
-                PedidoNegocio pedidoNegocio = new PedidoNegocio();
-                List<DetallePedido> detallePedido = detallePedidoNegocio.listar(int.Parse(idPedido));
-                rpPlatosPedido.DataSource = detallePedido;
-                rpPlatosPedido.DataBind();
+                    DetallePedidoNegocio detallePedidoNegocio = new DetallePedidoNegocio();
+                    List<DetallePedido> detallePedido = detallePedidoNegocio.listar(int.Parse(idPedido));
+
+                    lblNumeroMesa.Text = "Numero Mesa: " + numeroMesa;
+
+                    int totalPagar = 0;
+                    foreach (DetallePedido item in detallePedido)
+                    {
+                        PlatoNegocio platoListar = new PlatoNegocio();
+                        Plato plato = platoListar.listar(item.IdPlato);
+                        totalPagar += item.Cantidad * (int)plato.Precio;
+                    }
+                    lblTotalPagar.Text = "Total a Pagar: " + totalPagar.ToString() + "$";
+                    rpPlatosPedido.DataSource = detallePedido;
+                    rpPlatosPedido.DataBind();
+                }
+                catch (Exception ex)
+                {
+                    Session.Add("error", ex.ToString());
+                    Response.Redirect("error.aspx");
+                }
             }
         }
 
         protected void rpPlatosPedido_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            try
             {
-                DetallePedido detallePedido = (DetallePedido)e.Item.DataItem;
-                Label labelNombre = (Label)e.Item.FindControl("lblNombre");
-                Label labelPrecio = (Label)e.Item.FindControl("lblPrecio");
-                PlatoNegocio platoNegocio = new PlatoNegocio();
-                Plato plato = platoNegocio.listar(detallePedido.IdPlato);
-                labelNombre.Text = plato.Nombre;
-                labelPrecio.Text = Convert.ToInt32(plato.Precio).ToString();
+                if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+                {
+                    DetallePedido detallePedido = (DetallePedido)e.Item.DataItem;
+                    Label labelNombre = (Label)e.Item.FindControl("lblNombre");
+                    Label labelPrecio = (Label)e.Item.FindControl("lblPrecio");
+                    PlatoNegocio platoNegocio = new PlatoNegocio();
+                    Plato plato = platoNegocio.listar(detallePedido.IdPlato);
+                    labelNombre.Text = plato.Nombre;
+                    labelPrecio.Text = Convert.ToInt32(plato.Precio).ToString() + "$";
+                }
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.ToString());
+                Response.Redirect("error.aspx");
             }
         }
 
         protected void btnVolver_Click(object sender, EventArgs e)
         {
-            string idMesa = Request.QueryString["IdMesa"].ToString();
-            Response.Redirect("CrearPedido.aspx?IdMesa=" + idMesa);
+            try
+            {
+                string idMesa = Request.QueryString["IdMesa"].ToString();
+                Response.Redirect("CrearPedido.aspx?IdMesa=" + idMesa);
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.ToString());
+                Response.Redirect("error.aspx");
+            }
         }
     }
 }

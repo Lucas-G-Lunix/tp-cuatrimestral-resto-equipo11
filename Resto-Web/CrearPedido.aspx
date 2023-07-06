@@ -21,7 +21,7 @@
 
                 <div class="mb-3">
                     <label for="txtNombreCliente" class="form-label">Nombre Cliente</label>
-                    <asp:TextBox runat="server" ID="txtNombreCliente" CssClass="form-control" required/>
+                    <asp:TextBox runat="server" ID="txtNombreCliente" CssClass="form-control" required />
                 </div>
                 <% if (Negocio.Seguridad.esAdmin(Session["usuario"]))
                     { %>
@@ -36,7 +36,7 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <asp:Button Text="Guardar" CssClass="btn btn-success" ID="btnGuardar" runat="server" OnClick="btnGuardar_Click" OnClientClick="return validar()" autopostback="false"/>
+                        <asp:Button Text="Guardar" CssClass="btn btn-success" ID="btnGuardar" runat="server" OnClick="btnGuardar_Click" OnClientClick="return validar()" autopostback="false" />
                         <a href="Default.aspx" class="btn btn-warning">Volver</a>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                     <asp:UpdatePanel ID="upPlatos" runat="server">
                         <ContentTemplate>
                             <div class="col" id="listaPedidos">
-                                <div class="overflow-auto" style="height: 600px" data-bs-spy="scroll" >
+                                <div class="overflow-auto" style="height: 600px" data-bs-spy="scroll">
                                     <asp:Repeater ID="rpPlatosPedido" runat="server" OnItemDataBound="rpPlatosPedido_ItemDataBound">
                                         <ItemTemplate>
                                             <div class="card mb-3">

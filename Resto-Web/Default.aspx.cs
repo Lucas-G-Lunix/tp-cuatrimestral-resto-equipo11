@@ -10,53 +10,93 @@ namespace Resto_Web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            try
             {
-                recargarCards();
+                if (!IsPostBack)
+                {
+                    recargarCards();
+                }
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.ToString());
+                Response.Redirect("error.aspx");
             }
         }
 
         protected void btnEliminarMesa_Click(object sender, EventArgs e)
         {
-            string valor = ((Button)sender).CommandArgument;
-            MesaNegocio mesaNegocio = new MesaNegocio();
-            mesaNegocio.eliminar(Convert.ToInt32(valor));
-            recargarCards();
+            try
+            {
+                string valor = ((Button)sender).CommandArgument;
+                MesaNegocio mesaNegocio = new MesaNegocio();
+                mesaNegocio.eliminar(Convert.ToInt32(valor));
+                recargarCards();
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.ToString());
+                Response.Redirect("error.aspx");
+            }
         }
 
         protected void btnAgregarMesa_Click(object sender, EventArgs e)
         {
-            string valor = ((Button)sender).CommandArgument;
-            MesaNegocio mesaNegocio = new MesaNegocio();
-            mesaNegocio.agregar();
-            recargarCards();
+            try
+            {
+                string valor = ((Button)sender).CommandArgument;
+                MesaNegocio mesaNegocio = new MesaNegocio();
+                mesaNegocio.agregar();
+                recargarCards();
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.ToString());
+                Response.Redirect("error.aspx");
+            }
         }
 
         protected void recargarCards()
         {
-            MesaNegocio mesaNegocio = new MesaNegocio();
-            if (Seguridad.esAdmin(Session["usuario"]))
+            try
             {
-                List<Mesa> mesas = mesaNegocio.listar();
-                rpMesas.DataSource = mesas;
-                rpMesas.DataBind();
-            }
-            else
-            {
-                if ((Usuario)Session["usuario"] != null)
+                MesaNegocio mesaNegocio = new MesaNegocio();
+                if (Seguridad.esAdmin(Session["usuario"]))
                 {
-                    Usuario usuario = (Usuario)Session["usuario"];
-                    List<Mesa> mesas = mesaNegocio.listarMesero(usuario.Id);
+                    List<Mesa> mesas = mesaNegocio.listar();
                     rpMesas.DataSource = mesas;
                     rpMesas.DataBind();
                 }
+                else
+                {
+                    if ((Usuario)Session["usuario"] != null)
+                    {
+                        Usuario usuario = (Usuario)Session["usuario"];
+                        List<Mesa> mesas = mesaNegocio.listarMesero(usuario.Id);
+                        rpMesas.DataSource = mesas;
+                        rpMesas.DataBind();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.ToString());
+                Response.Redirect("error.aspx");
             }
         }
 
         protected void btnCrearPedido_Click(object sender, EventArgs e)
         {
-            string valor = ((Button)sender).CommandArgument;
-            Response.Redirect("CrearPedido.aspx?IdMesa=" + valor, false);
+            try
+            {
+                string valor = ((Button)sender).CommandArgument;
+                Response.Redirect("CrearPedido.aspx?IdMesa=" + valor, false);
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.ToString());
+                Response.Redirect("error.aspx");
+            }
         }
     }
 }

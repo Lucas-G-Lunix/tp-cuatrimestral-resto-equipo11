@@ -8,21 +8,29 @@ namespace Resto_Web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            imgPerfil.ImageUrl = "Images/Design/no_image.svg";
-
-            if (!(Page is Login || Page is Registrarse || Page is Error))
+            try
             {
-                if (!Seguridad.sesionActiva(Session["usuario"]))
-                    Response.Redirect("Login.aspx", false);
-                else
+                imgPerfil.ImageUrl = "Images/Design/no_image.svg";
+
+                if (!(Page is Login || Page is Registrarse || Page is Error))
                 {
-                    Usuario user = (Usuario)Session["usuario"];
-                    //lblUser.Text = user.Email;
-                    if (!string.IsNullOrEmpty(user.ImagenURL))
+                    if (!Seguridad.sesionActiva(Session["usuario"]))
+                        Response.Redirect("Login.aspx", false);
+                    else
                     {
-                        imgPerfil.ImageUrl = "~/Images/Usuarios/" + user.ImagenURL;
+                        Usuario user = (Usuario)Session["usuario"];
+                        //lblUser.Text = user.Email;
+                        if (!string.IsNullOrEmpty(user.ImagenURL))
+                        {
+                            imgPerfil.ImageUrl = "~/Images/Usuarios/" + user.ImagenURL;
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.ToString());
+                Response.Redirect("error.aspx");
             }
         }
 

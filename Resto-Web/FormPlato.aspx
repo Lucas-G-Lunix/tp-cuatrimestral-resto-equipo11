@@ -36,7 +36,6 @@
                     <asp:DropDownList ID="ddlCategoria" CssClass="form-select" runat="server"></asp:DropDownList>
                 </div>
 
-
                 <div class="mb-3">
                     <label for="txtPrecio" class="form-label">Precio</label>
                     <asp:TextBox runat="server" ID="txtPrecio" CssClass="form-control" />
@@ -44,7 +43,7 @@
 
                 <div class="mb-3">
                     <label class="form-label">Imagen Plato</label>
-                    <input type="file" id="txtImagen" runat="server" class="form-control"/>
+                    <input type="file" id="txtImagen" runat="server" class="form-control" />
                 </div>
 
                 <div class="row">

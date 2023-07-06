@@ -51,8 +51,6 @@
                                         <hr />
                                         <div class="d-grid gap-2 d-md-block">
                                             <asp:Button ID="btnCrearPedido" runat="server" Text='<%# Convert.ToInt32(Eval("IdPedido")) == 0 ? "Crear Pedido" : "Mostrar Pedido"%>' CssClass="btn btn-info" type="button" OnClick="btnCrearPedido_Click" CommandArgument='<%# Eval("Id") %>' CommandName="Id" />
-
-
                                             <% 
                                                 if (Negocio.Seguridad.esAdmin(Session["usuario"]))
                                                 {

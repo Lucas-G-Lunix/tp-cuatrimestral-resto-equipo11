@@ -16,38 +16,44 @@ namespace Resto_Web
 
         protected void btnConfirmar_Click(object sender, EventArgs e)
         {
-            Usuario usuario = new Usuario();
-            UsuarioNegocio negocio = new UsuarioNegocio();
             try
             {
-                usuario.Email = txtEmail.Text;
-                usuario.Pass = txtPassword.Text;
-                if (negocio.Login(usuario))
+                Usuario usuario = new Usuario();
+                UsuarioNegocio negocio = new UsuarioNegocio();
+                try
                 {
-                    Session.Add("usuario", usuario);
-                    Response.Redirect("Default.aspx", false);
+                    usuario.Email = txtEmail.Text;
+                    usuario.Pass = txtPassword.Text;
+                    if (negocio.Login(usuario))
+                    {
+                        Session.Add("usuario", usuario);
+                        Response.Redirect("Default.aspx", false);
+                    }
+                    else
+                    {
+                        Session.Add("error", "User o Pass incorrectos");
+                        Response.Redirect("Error.aspx", false);
+                    }
                 }
-                else
+                catch (System.Threading.ThreadAbortException)
                 {
-                    Session.Add("error", "User o Pass incorrectos");
-                    Response.Redirect("Error.aspx", false);
-                }
-            }
-            catch (System.Threading.ThreadAbortException)
-            {
 
+                }
+                catch (Exception ex)
+                {
+                    Session.Add("error", ex.ToString());
+                    Response.Redirect("Error.aspx");
+                }
             }
             catch (Exception ex)
             {
                 Session.Add("error", ex.ToString());
-                Response.Redirect("Error.aspx");
+                Response.Redirect("error.aspx");
             }
         }
         private void Page_Error(object sender, EventArgs e)
         {
             Exception exc = Server.GetLastError();
-
-
             Session.Add("error", exc.ToString());
             Server.Transfer("Error.aspx");
         }

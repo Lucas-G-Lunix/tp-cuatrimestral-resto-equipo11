@@ -33,7 +33,7 @@
                     <asp:TextBox ID="txtNuevoCategoria" runat="server" CssClass="form-control"></asp:TextBox>
                 </div>
                 <div class="col-auto">
-                    <asp:Button ID="btnAgregarCategoria" runat="server" Text="Agregar" CssClass="btn btn-primary mb-3" OnClick="btnAgregarCategoria_Click" OnClientClick="return validar();" autopostback="false"/>
+                    <asp:Button ID="btnAgregarCategoria" runat="server" Text="Agregar" CssClass="btn btn-primary mb-3" OnClick="btnAgregarCategoria_Click" OnClientClick="return validar();" autopostback="false" />
                 </div>
             </div>
             <div class="row">

@@ -15,6 +15,7 @@
             height: 15vw;
             object-fit: cover;
         }
+
         .alert-fixed {
             position: fixed;
             top: 0px;

@@ -14,16 +14,6 @@ namespace Resto_Web
         {
             try
             {
-                if (Validacion.validaTextoVacio(txtNombre) ||
-                Validacion.validaTextoVacio(txtApellido) ||
-                Validacion.validaTextoVacio(txtContraseña) ||
-                Validacion.validaTextoVacio(txtMail) ||
-                Validacion.validaTextoVacio(txtNacimiento)
-                )
-                {
-                    Session.Add("error", "Debes completar todos los campos...");
-                    Response.Redirect("Error.aspx");
-                }
                 Usuario usuario = new Usuario();
                 UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
                 usuario.Nombre = txtNombre.Text;
