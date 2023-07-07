@@ -36,7 +36,7 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <asp:Button Text="Guardar" CssClass="btn btn-success" ID="btnGuardar" runat="server" OnClick="btnGuardar_Click" OnClientClick="return validar()" autopostback="false" />
+                        <asp:Button Text="Generar Pedido" CssClass="btn btn-success" ID="btnGuardar" runat="server" OnClick="btnGuardar_Click" OnClientClick="return validar()" autopostback="false" />
                         <a href="Default.aspx" class="btn btn-warning">Volver</a>
                     </div>
                 </div>

@@ -33,6 +33,8 @@ namespace Resto_Web
                 EtiquetaNegocio etiquetaNegocio = new EtiquetaNegocio();
                 string id = gvTipo.SelectedDataKey.Value.ToString();
                 etiquetaNegocio.eliminar(true, int.Parse(id));
+                lblNotification.Text = "Tipo eliminada correctamente";
+                divNotifications.Attributes["class"] = "alert alert-warning alert-dismissible fade show alert-fixed";
                 RecargarGrilla();
             }
             catch (Exception ex)
@@ -65,6 +67,9 @@ namespace Resto_Web
                 Etiqueta etiqueta = new Etiqueta();
                 etiqueta.Descripcion = txtNuevoTipo.Text;
                 etiquetaNegocio.agregar(true, etiqueta);
+                lblNotification.Text = "Tipo Agregado";
+                divNotifications.Attributes["class"] = "alert alert-success alert-dismissible fade show alert-fixed";
+                panelNotificaciones.Visible = true;
                 RecargarGrilla();
             }
             catch (Exception ex)

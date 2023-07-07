@@ -32,7 +32,7 @@
         <ContentTemplate>
             <div class="container my-3">
                 <asp:Panel ID="panelNotificaciones" runat="server">
-                    <div role="alert" id="divNotifications" runat="server" class="">
+                    <div role="alert" id="divNotifications" runat="server" class="alert-fixed">
                         <asp:Label ID="lblNotification" runat="server" Text="Label"></asp:Label>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>

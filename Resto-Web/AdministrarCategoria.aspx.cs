@@ -34,6 +34,9 @@ namespace Resto_Web
                 EtiquetaNegocio etiquetaNegocio = new EtiquetaNegocio();
                 string id = gvCategoria.SelectedDataKey.Value.ToString();
                 etiquetaNegocio.eliminar(false, int.Parse(id));
+                lblNotification.Text = "Categoria eliminada correctamente";
+                divNotifications.Attributes["class"] = "alert alert-warning alert-dismissible fade show alert-fixed";
+                panelNotificaciones.Visible = true;
                 RecargarGrilla();
             }
             catch (Exception ex)
@@ -51,6 +54,9 @@ namespace Resto_Web
                 Etiqueta etiqueta = new Etiqueta();
                 etiqueta.Descripcion = txtNuevoCategoria.Text;
                 etiquetaNegocio.agregar(false, etiqueta);
+                lblNotification.Text = "Categoria Agregada";
+                divNotifications.Attributes["class"] = "alert alert-success alert-dismissible fade show alert-fixed";
+                panelNotificaciones.Visible = true;
                 RecargarGrilla();
             }
             catch (Exception ex)

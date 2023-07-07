@@ -5,10 +5,25 @@
         .noMostrar {
             display: none;
         }
+        
+        .alert-fixed {
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            z-index: 9999;
+            border-radius: 0px
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container">
+        <asp:Panel ID="panelNotificaciones" runat="server">
+            <div role="alert" id="divNotifications" runat="server" class="alert-fixed">
+                <asp:Label ID="lblNotification" runat="server" Text="Label"></asp:Label>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </asp:Panel>
         <div class="row">
             <div class="col">
                 <h1>Categorias</h1>
