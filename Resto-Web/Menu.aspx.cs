@@ -176,10 +176,23 @@ namespace Resto_Web
                 lblNotification.Text = "Plato agregado al pedido";
                 divNotifications.Attributes["class"] = "alert alert-success alert-dismissible fade show alert-fixed";
                 panelNotificaciones.Visible = true;
+                RecargarMenu();
             }
             catch (Exception ex)
             {
-                string Error = ex.Message.Contains("Hay platos duplicados") ? "El plato ya se encuentra en el pedido" : "Otro Error";
+                string Error = "";
+                if (ex.Message.Contains("Hay platos duplicados"))
+                {
+                    Error = "El plato ya se encuentra en el pedido";
+                }
+                else if (ex.Message.Contains("No hay suficiente stock"))
+                {
+                    Error = "No hay suficiente stock";
+                }
+                else
+                {
+                    Error = "Otro Error";
+                }
                 lblNotification.Text = Error;
                 divNotifications.Attributes["class"] = "alert alert-warning alert-dismissible fade show alert-fixed";
                 panelNotificaciones.Visible = true;

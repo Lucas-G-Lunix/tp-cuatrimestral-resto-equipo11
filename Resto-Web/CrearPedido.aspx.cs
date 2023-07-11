@@ -54,6 +54,7 @@ namespace Resto_Web
                         txtNumeroMesa.Text = seleccionada.NumeroMesa.ToString();
                         txtNombreCliente.Text = pedido.NombreCliente;
                         ddlMesero.SelectedValue = pedido.IdMesero.ToString();
+                        btnGuardar.Enabled = false;
                         RecargarPlatos();
                     }
                 }
