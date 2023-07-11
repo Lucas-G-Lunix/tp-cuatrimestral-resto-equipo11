@@ -7,6 +7,12 @@
     <h1>Pedido</h1>
     <hr />
     <div class="container">
+        <asp:Panel ID="panelNotificaciones" runat="server">
+            <div role="alert" id="divNotifications" runat="server" class="alert-fixed">
+                <asp:Label ID="lblNotification" runat="server" Text="Label"></asp:Label>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </asp:Panel>
         <div class="row">
             <div class="col-md-4 needs-validation">
                 <div class="mb-3">

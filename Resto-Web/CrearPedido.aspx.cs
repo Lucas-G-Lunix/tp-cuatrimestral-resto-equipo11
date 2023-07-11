@@ -162,6 +162,7 @@ namespace Resto_Web
         {
             try
             {
+                panelNotificaciones.Visible = false;
                 string idPlato = ((LinkButton)sender).CommandArgument;
                 string idPedido = txtNumeroPedido.Text;
                 string cantidad = String.Format("{0}", Request.Form["txtCantidad" + idPlato]);
@@ -175,8 +176,18 @@ namespace Resto_Web
             }
             catch (Exception ex)
             {
-                Session.Add("error", ex.ToString());
-                Response.Redirect("error.aspx");
+                string Error = "";
+                if (ex.Message.Contains("No hay suficiente stock"))
+                {
+                    Error = "No hay suficiente stock";
+                }
+                else
+                {
+                    Error = "Otro Error";
+                }
+                lblNotification.Text = Error;
+                divNotifications.Attributes["class"] = "alert alert-warning alert-dismissible fade show alert-fixed";
+                panelNotificaciones.Visible = true;
             }
         }
 
