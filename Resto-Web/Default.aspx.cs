@@ -15,6 +15,7 @@ namespace Resto_Web
                 if (!IsPostBack)
                 {
                     recargarCards();
+                    panelNotificaciones.Visible = false;
                 }
             }
             catch (Exception ex)
@@ -31,6 +32,9 @@ namespace Resto_Web
                 string valor = ((Button)sender).CommandArgument;
                 MesaNegocio mesaNegocio = new MesaNegocio();
                 mesaNegocio.eliminar(Convert.ToInt32(valor));
+                lblNotification.Text = "Mesa eliminada correctamente";
+                divNotifications.Attributes["class"] = "alert alert-danger alert-dismissible fade show alert-fixed";
+                panelNotificaciones.Visible = true;
                 recargarCards();
             }
             catch (Exception ex)
@@ -47,6 +51,9 @@ namespace Resto_Web
                 string valor = ((Button)sender).CommandArgument;
                 MesaNegocio mesaNegocio = new MesaNegocio();
                 mesaNegocio.agregar();
+                lblNotification.Text = "Mesa agregada correctamente";
+                divNotifications.Attributes["class"] = "alert alert-success alert-dismissible fade show alert-fixed";
+                panelNotificaciones.Visible = true;
                 recargarCards();
             }
             catch (Exception ex)

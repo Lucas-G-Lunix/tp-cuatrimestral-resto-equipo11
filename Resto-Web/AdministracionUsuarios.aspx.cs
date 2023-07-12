@@ -10,9 +10,15 @@ namespace Resto_Web
         {
             try
             {
+                if (!Seguridad.esAdmin(Session["usuario"]))
+                {
+                    Session.Add("error", "Se requiere permisos de admin para acceder a esta pantalla");
+                    Response.Redirect("Error.aspx");
+                }
                 if (!IsPostBack)
                 {
                     RecargarGrilla();
+                    panelNotificaciones.Visible = false;
                 }
             }
             catch (Exception ex)
@@ -22,19 +28,6 @@ namespace Resto_Web
             }
         }
 
-        protected void gvUsuarios_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                string id = gvUsuarios.SelectedDataKey.Value.ToString();
-                UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
-            }
-            catch (Exception ex)
-            {
-                Session.Add("error", ex.ToString());
-                Response.Redirect("error.aspx");
-            }
-        }
 
         protected void RecargarGrilla()
         {
@@ -97,9 +90,24 @@ namespace Resto_Web
             }
             catch (Exception ex)
             {
-                Session.Add("error", ex.ToString());
-                Response.Redirect("error.aspx");
+                string Error = "";
+                if (ex.Message.Contains("El usuario esta asignado a una mesa"))
+                {
+                    Error = "El usuario esta asignado a una mesa";
+                }
+                else
+                {
+                    Error = "Otro Error";
+                }
+                lblNotification.Text = Error;
+                divNotifications.Attributes["class"] = "alert alert-warning alert-dismissible fade show alert-fixed";
+                panelNotificaciones.Visible = true;
             }
+        }
+
+        protected void gvUsuarios_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

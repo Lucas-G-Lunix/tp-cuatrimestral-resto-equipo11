@@ -18,12 +18,12 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container">
-        <asp:Panel ID="panelNotificaciones" runat="server">
+        <asp:PlaceHolder ID="panelNotificaciones" runat="server">
             <div role="alert" id="divNotifications" runat="server" class="alert-fixed">
                 <asp:Label ID="lblNotification" runat="server" Text="Label"></asp:Label>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-        </asp:Panel>
+        </asp:PlaceHolder>
         <div class="row">
             <div class="col">
                 <h1>Tipos</h1>
