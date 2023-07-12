@@ -55,7 +55,7 @@
                                                 if (Negocio.Seguridad.esAdmin(Session["usuario"]))
                                                 {
                                             %>
-                                            <asp:Button ID="btnEliminarMesa" runat="server" Text="Eliminar Mesa" CssClass="btn btn-danger" type="button" OnClick="btnEliminarMesa_Click" CommandArgument='<%# Eval("Id") %>' CommandName="Id" />
+                                            <asp:Button ID="btnEliminarMesa" runat="server" Text="Eliminar Mesa" CssClass="btn btn-danger" Visible='<%#Container.ItemIndex==(rpMesas.DataSource as IList).Count-1? true : false %>' type="button" OnClick="btnEliminarMesa_Click" CommandArgument='<%# Eval("Id") %>' CommandName="Id" />
                                             <%
                                                 }
                                             %>

@@ -18,6 +18,7 @@ namespace Resto_Web
                 if (!IsPostBack)
                 {
                     RecargarGrilla();
+                    panelNotificaciones.Visible = false;
                 }
             }
             catch (Exception ex)
@@ -39,8 +40,18 @@ namespace Resto_Web
             }
             catch (Exception ex)
             {
-                Session.Add("error", ex.ToString());
-                Response.Redirect("error.aspx");
+                string Error = "";
+                if (ex.Message.Contains("El tipo esta asiganado a un plato"))
+                {
+                    Error = "El tipo se encuentra asignado a un plato";
+                }
+                else
+                {
+                    Error = "Otro Error";
+                }
+                lblNotification.Text = Error;
+                divNotifications.Attributes["class"] = "alert alert-warning alert-dismissible fade show alert-fixed";
+                panelNotificaciones.Visible = true;
             }
         }
 

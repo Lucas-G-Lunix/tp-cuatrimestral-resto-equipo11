@@ -18,6 +18,7 @@ namespace Resto_Web
                 if (!IsPostBack)
                 {
                     RecargarGrilla();
+                    panelNotificaciones.Visible = false;
                 }
             }
             catch (Exception ex)
@@ -41,8 +42,18 @@ namespace Resto_Web
             }
             catch (Exception ex)
             {
-                Session.Add("error", ex.ToString());
-                Response.Redirect("error.aspx");
+                string Error = "";
+                if (ex.Message.Contains("La categoria esta asiganada a un plato"))
+                {
+                    Error = "La categoria se encuentra asignada a un plato";
+                }
+                else
+                {
+                    Error = "Otro Error";
+                }
+                lblNotification.Text = Error;
+                divNotifications.Attributes["class"] = "alert alert-warning alert-dismissible fade show alert-fixed";
+                panelNotificaciones.Visible = true;
             }
         }
 

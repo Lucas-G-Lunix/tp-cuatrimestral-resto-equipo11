@@ -7,12 +7,12 @@
     <h1>Pedido</h1>
     <hr />
     <div class="container">
-        <asp:Panel ID="panelNotificaciones" runat="server">
+        <asp:PlaceHolder ID="panelNotificaciones" runat="server">
             <div role="alert" id="divNotifications" runat="server" class="alert-fixed">
                 <asp:Label ID="lblNotification" runat="server" Text="Label"></asp:Label>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-        </asp:Panel>
+        </asp:PlaceHolder>
         <div class="row">
             <div class="col-md-4 needs-validation">
                 <div class="mb-3">
@@ -53,7 +53,7 @@
                     <asp:UpdatePanel ID="upPlatos" runat="server">
                         <ContentTemplate>
                             <div class="col" id="listaPedidos">
-                                <div class="overflow-auto" style="height: 600px" data-bs-spy="scroll">
+                                <div class="overflow-auto" style="height: 450px" data-bs-spy="scroll">
                                     <asp:Repeater ID="rpPlatosPedido" runat="server" OnItemDataBound="rpPlatosPedido_ItemDataBound">
                                         <ItemTemplate>
                                             <div class="card mb-3">
@@ -89,10 +89,10 @@
                                     </asp:Repeater>
                                 </div>
                                 <div class="row">
-                                    <div class="d-grid gap-2">
+                                    <div class="d-grid gap-2 my-3">
                                         <asp:Button Text="Agregar Platos" CssClass="btn btn-success" ID="btnAgregarProductos" runat="server" OnClick="btnAgregarProductos_Click" />
+                                        <asp:Button Text="Generar Ticket" CssClass="btn btn-info" ID="btnGenerarTicket" runat="server" OnClick="btnGenerarTicket_Click" />
                                         <asp:Button Text="Finalizar Pedido" CssClass="btn btn-danger" ID="btnFinalizarPedido" runat="server" OnClick="btnFinalizarPedido_Click" />
-                                        <asp:Button Text="Generar Ticket" CssClass="btn btn-success" ID="btnGenerarTicket" runat="server" OnClick="btnGenerarTicket_Click"/>
                                     </div>
                                 </div>
                             </div>

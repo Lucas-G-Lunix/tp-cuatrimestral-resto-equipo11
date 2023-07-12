@@ -61,10 +61,28 @@ namespace Resto_Web
 
         protected void btnEliminarPlato_Click(object sender, EventArgs e)
         {
-            string valor = ((Button)sender).CommandArgument;
-            PlatoNegocio platoNegocio = new PlatoNegocio();
-            platoNegocio.eliminar(Convert.ToInt32(valor));
-            RecargarMenu();
+            try
+            {
+                string valor = ((Button)sender).CommandArgument;
+                PlatoNegocio platoNegocio = new PlatoNegocio();
+                platoNegocio.eliminar(Convert.ToInt32(valor));
+                RecargarMenu();
+            }
+            catch (Exception ex)
+            {
+                string Error = "";
+                if (ex.Message.Contains("En plato se encuentra en un Pedido"))
+                {
+                    Error = "El plato se encuentra en un pedido para ser eliminado debe finalizarse el pedido";
+                }
+                else
+                {
+                    Error = "Otro Error";
+                }
+                lblNotification.Text = Error;
+                divNotifications.Attributes["class"] = "alert alert-warning alert-dismissible fade show alert-fixed";
+                panelNotificaciones.Visible = true;
+            }
         }
 
         protected void txtFiltrar_TextChanged(object sender, EventArgs e)

@@ -16,9 +16,11 @@ namespace Resto_Web
                 PedidoNegocio pedidoNegocio = new PedidoNegocio();
                 MesaNegocio mesaNegocio = new MesaNegocio();
                 PlatoNegocio platoNegocio = new PlatoNegocio();
+                
 
                 if (Request.QueryString["IdMesa"] != null)
                 {
+                    panelNotificaciones.Visible = false;
                     if (!IsPostBack)
                     {
                         UsuarioNegocio negocio = new UsuarioNegocio();
@@ -39,6 +41,7 @@ namespace Resto_Web
 
                         txtNumeroPedido.Text = pedidoNegocio.ultimoID().ToString();
 
+                       
                         btnAgregarProductos.Enabled = false;
                         btnFinalizarPedido.Enabled = false;
                         btnGenerarTicket.Enabled = false;

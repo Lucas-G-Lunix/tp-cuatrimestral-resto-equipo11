@@ -30,7 +30,7 @@ namespace Resto_Web
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panelNotificaciones;
+        protected global::System.Web.UI.WebControls.PlaceHolder panelNotificaciones;
 
         /// <summary>
         /// divNotifications control.
@@ -132,15 +132,6 @@ namespace Resto_Web
         protected global::System.Web.UI.WebControls.Button btnAgregarProductos;
 
         /// <summary>
-        /// btnFinalizarPedido control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnFinalizarPedido;
-
-        /// <summary>
         /// btnGenerarTicket control.
         /// </summary>
         /// <remarks>
@@ -148,5 +139,14 @@ namespace Resto_Web
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnGenerarTicket;
+
+        /// <summary>
+        /// btnFinalizarPedido control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnFinalizarPedido;
     }
 }

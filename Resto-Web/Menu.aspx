@@ -31,12 +31,12 @@
     <asp:UpdatePanel ID="upMenu" runat="server">
         <ContentTemplate>
             <div class="container my-3">
-                <asp:Panel ID="panelNotificaciones" runat="server">
+                <asp:PlaceHolder ID="panelNotificaciones" runat="server">
                     <div role="alert" id="divNotifications" runat="server" class="alert-fixed">
                         <asp:Label ID="lblNotification" runat="server" Text="Label"></asp:Label>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
-                </asp:Panel>
+                </asp:PlaceHolder>
                 <div class="row my-1">
                     <div class="input-group my-2">
                         <div class="d-grid gap-3 d-md-block mx-2">
