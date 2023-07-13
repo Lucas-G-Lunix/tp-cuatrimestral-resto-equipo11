@@ -70,6 +70,56 @@ namespace Negocio
             }
         }
 
+        public bool existeUser(string mail)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("SELECT * FROM USERS WHERE Email = @Email");
+                datos.setearParametro("@Email", mail);
+                datos.ejecutarLectura();
+                if (datos.Lector.Read())
+                {
+                    return true;
+                }
+                return false;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public int idUser(string mail)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("SELECT Id FROM USERS WHERE Email = @Email");
+                datos.setearParametro("@Email", mail);
+                datos.ejecutarLectura();
+                if (datos.Lector.Read())
+                {
+                    return (int)datos.Lector["Id"];
+                }
+                return -1;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
         public void actualizar(Usuario user)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -82,6 +132,29 @@ namespace Negocio
                 datos.setearParametro("@Apellido", user.Apellido);
                 datos.setearParametro("@Fecha", user.FechaNacimiento);
                 datos.setearParametro("@Id", user.Id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+
+
+
+            }
+        }
+
+        public void actualizarContraseña(int id, string contraseña)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("UPDATE USERS SET Pass = @Pass WHERE Id = @Id");
+                datos.setearParametro("@Pass", contraseña);
+                datos.setearParametro("@Id", id);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)

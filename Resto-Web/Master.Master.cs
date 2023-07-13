@@ -12,7 +12,7 @@ namespace Resto_Web
             {
                 imgPerfil.ImageUrl = "Images/Design/no_image.svg";
 
-                if (!(Page is Login || Page is Registrarse || Page is Error))
+                if (!(Page is Login || Page is Registrarse || Page is Error || Page is ReseteoContraseñia))
                 {
                     if (!Seguridad.sesionActiva(Session["usuario"]))
                         Response.Redirect("Login.aspx", false);

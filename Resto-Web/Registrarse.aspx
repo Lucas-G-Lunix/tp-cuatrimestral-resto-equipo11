@@ -41,7 +41,7 @@
                                 <div class="row">
                                     <div class="mb-4 pb-2">
                                         <div class="form-outline">
-                                            <asp:TextBox ID="txtContraseña" runat="server" CssClass="form-control form-control-lg" TextMode="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="La contraseña debe contener al menos un numero, una letra mayuscula, una letra minuscula, y por lo menos 8 caracteres"></asp:TextBox>
+                                            <asp:TextBox ID="txtContraseña" runat="server" CssClass="form-control form-control-lg" TextMode="Password" pattern="^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$" title="La contraseña no es valida. Esta debe contener al menos un numero, un caracter especial(!@#$%^&*) una letra mayuscula, una letra minuscula, y por lo menos 8 caracteres"></asp:TextBox>
                                             <label class="form-label" for="txtContraseña">Contraseña</label>
                                         </div>
                                     </div>
