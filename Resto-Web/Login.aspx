@@ -29,7 +29,7 @@
                                     <div class="form-outline">
                                         <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control form-control-lg" TextMode="Password"></asp:TextBox>
                                         <label class="form-label" for="txtPassword">Contraseña</label>
-                                        <asp:LinkButton ID="btnOlvidoContraseña" runat="server" CssClass="form-label d-block" autopostback="false" OnClientClick="return validar()" OnClick="btnOlvidoContraseña_Click">Has olvidado la contraseña?</asp:LinkButton>
+                                        <asp:LinkButton ID="btnOlvidoContraseña" runat="server" CssClass="form-label d-block" autopostback="false" OnClientClick="return validarRecuperar()" OnClick="btnOlvidoContraseña_Click">Has olvidado la contraseña?</asp:LinkButton>
                                     </div>
                                 </div>
                             </div>
@@ -47,7 +47,7 @@
         </div>
     </section>
     <script>
-    function validar() {
+    function validarRecuperar() {
         var mail = document.getElementById("ContentPlaceHolder1_txtEmail").value;
         var patternTexto = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if (mail === "") {
@@ -59,6 +59,20 @@
             return false;
         }
         return true;
-    }
+        }
+
+        function validar() {
+            var mail = document.getElementById("ContentPlaceHolder1_txtEmail").value;
+            var password = document.getElementById("ContentPlaceHolder1_txtPassword").value;
+
+            if (mail === "") {
+                alert("Debes completar el campo de mail");
+                return false;
+            }
+            if (password === "") {
+                alert("Debes completar el campo de contraseña");
+                return false;
+            }
+        }
     </script>
 </asp:Content>
