@@ -41,7 +41,7 @@
                                 <div class="row">
                                     <div class="mb-4 pb-2">
                                         <div class="form-outline">
-                                            <asp:TextBox ID="txtContraseña" runat="server" CssClass="form-control form-control-lg" TextMode="Password" pattern="^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$" title="La contraseña no es valida. Esta debe contener al menos un numero, un caracter especial(!@#$%^&*) una letra mayuscula, una letra minuscula, y por lo menos 8 caracteres"></asp:TextBox>
+                                            <asp:TextBox ID="txtContraseña" runat="server" CssClass="form-control form-control-lg" TextMode="Password"></asp:TextBox>
                                             <label class="form-label" for="txtContraseña">Contraseña</label>
                                         </div>
                                     </div>
@@ -72,7 +72,9 @@
             var apellido = document.getElementById("ContentPlaceHolder1_txtApellido").value;
             var mail = document.getElementById("ContentPlaceHolder1_txtMail").value;
             var contraseña = document.getElementById("ContentPlaceHolder1_txtContraseña").value;
+            var fechaNacimiento = document.getElementById("ContentPlaceHolder1_txtNacimiento").value;
 
+            var patternContraseña = /^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!&$%&? "]).*$/
             var patternTexto = /^[A-Za-zñÑáéíóúÁÉÍÓÚ\s]*$/;
             var patternMail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -107,6 +109,17 @@
                 alert("Debes completar el campo de la contraseña");
                 return false;
             }
+
+            if (!patternContraseña.test(contraseña)) {
+                alert("La contraseña no es valida. Esta debe contener al menos un numero, un caracter especial(!@#$%^&*) una letra mayuscula, una letra minuscula, y por lo menos 8 caracteres");
+                return false;
+            }
+
+            if (fechaNacimiento === "") {
+                alert("Debes completar el campo de la fecha de nacimiento");
+                return false;
+            }
+
             return true;
         }
     </script>
