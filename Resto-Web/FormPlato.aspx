@@ -65,7 +65,7 @@
             var stock = document.getElementById("ContentPlaceHolder1_txtStock").value;
             var precio = document.getElementById("ContentPlaceHolder1_txtPrecio").value;
             var patternNumeros = /^[0-9]*$/;
-            var patternTexto = /^[a-zA-Z ]*$/;
+            var patternTexto = /^[A-Za-zñÑáéíóúÁÉÍÓÚ\s]*$/;
             if (nombrePlato === "") {
                 alert("Debes completar el campo nombre del plato");
                 return false;

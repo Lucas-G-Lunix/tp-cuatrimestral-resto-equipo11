@@ -73,7 +73,7 @@
             var mail = document.getElementById("ContentPlaceHolder1_txtMail").value;
             var contraseña = document.getElementById("ContentPlaceHolder1_txtContraseña").value;
 
-            var patternTexto = /^[a-zA-Z ]*$/;
+            var patternTexto = /^[A-Za-zñÑáéíóúÁÉÍÓÚ\s]*$/;
             var patternMail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
             if (nombre === "") {

@@ -59,7 +59,7 @@
     <script>
         function validar() {
             var nombreCategoria = document.getElementById("ContentPlaceHolder1_txtNuevoCategoria").value;
-            var patternTexto = /^[a-zA-Z ]*$/;
+            var patternTexto = /^[A-Za-zñÑáéíóúÁÉÍÓÚ\s]*$/;
             if (nombreCategoria === "") {
                 alert("Debes completar el campo con el nombre de la categoria");
                 return false;
