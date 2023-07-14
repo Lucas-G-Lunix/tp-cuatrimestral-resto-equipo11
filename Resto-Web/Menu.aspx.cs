@@ -30,7 +30,14 @@ namespace Resto_Web
                     ddlCategoria.DataTextField = "Descripcion";
                     ddlCategoria.DataBind();
                 }
-                if (Request.QueryString["plato"] != null)
+                if (IsPostBack)
+                {
+                    if (Session["count"] != null)
+                    {
+                        Session["count"] = (int)Session["count"] + 1;
+                    }
+                }
+                if (Request.QueryString["plato"] != null && int.Parse(Session["count"].ToString()) == 0)
                 {
                     if (Convert.ToBoolean(Request.QueryString["plato"]))
                     {

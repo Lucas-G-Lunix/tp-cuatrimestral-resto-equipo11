@@ -108,6 +108,13 @@ namespace Resto_Web
                 nuevo.Categoria = new Etiqueta();
                 nuevo.Categoria.Id = int.Parse(ddlCategoria.SelectedValue);
 
+                if (Session["count"] == null)
+                {
+                    Session.Add("count", 0);
+                } else
+                {
+                    Session["count"] = 0;
+                }
                 if (Request.QueryString["IdPlato"] != null)
                 {
                     nuevo.Id = int.Parse(txtId.Text);
