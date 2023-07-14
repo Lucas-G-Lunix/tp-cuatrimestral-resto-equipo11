@@ -33,6 +33,30 @@ namespace Negocio
             }
         }
 
+        public void modificar(Pedido pedido)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            List<Mesa> mesas = new List<Mesa>();
+            try
+            {
+                datos.setearConsulta("UPDATE PEDIDOS SET NombreCliente = @NombreCliente, IdMesa = @IdMesa, IdUser = @IdUser WHERE Id = @Id");
+                datos.setearParametro("@NombreCliente", pedido.NombreCliente);
+                datos.setearParametro("@IdMesa", pedido.IdMesa);
+                datos.setearParametro("@IdUser", pedido.IdMesero);
+                datos.setearParametro("@Id", pedido.Id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
         public int ultimoID()
         {
             AccesoDatos datos = new AccesoDatos();

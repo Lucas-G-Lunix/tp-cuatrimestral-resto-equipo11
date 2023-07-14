@@ -57,7 +57,7 @@ namespace Resto_Web
                         txtNumeroMesa.Text = seleccionada.NumeroMesa.ToString();
                         txtNombreCliente.Text = pedido.NombreCliente;
                         ddlMesero.SelectedValue = pedido.IdMesero.ToString();
-                        btnGuardar.Enabled = false;
+                        btnGuardar.Text = "Modificar Pedido";
                         RecargarPlatos();
                     }
                 }
@@ -80,18 +80,25 @@ namespace Resto_Web
                 Pedido nuevo = new Pedido();
                 Mesa mesa = new Mesa();
 
+                nuevo.Id = int.Parse(txtNumeroPedido.Text);
                 nuevo.IdMesa = int.Parse(idMesa);
                 nuevo.NombreCliente = txtNombreCliente.Text;
                 nuevo.IdMesero = int.Parse(ddlMesero.SelectedValue);
                 nuevo.FechaPedido = DateTime.Now;
 
                 mesa.Id = int.Parse(idMesa);
-                mesa.IdPedido = pedidoNegocio.ultimoID();
                 mesa.IdMesero = int.Parse(ddlMesero.SelectedValue);
 
-                pedidoNegocio.agregar(nuevo);
+                if ((mesaNegocio.listar(int.Parse(idMesa))).IdPedido != null)
+                {
+                    mesa.IdPedido = nuevo.Id;
+                    pedidoNegocio.modificar(nuevo);
+                } else
+                {
+                    mesa.IdPedido = pedidoNegocio.ultimoID();
+                    pedidoNegocio.agregar(nuevo);
+                }
                 mesaNegocio.modificar(mesa);
-
 
                 Response.Redirect("CrearPedido.aspx?IdMesa=" + idMesa, false);
             }
